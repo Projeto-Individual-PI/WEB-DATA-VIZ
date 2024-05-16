@@ -1,0 +1,204 @@
+
+
+        
+        
+
+body {
+  
+    margin: 0%;
+    padding: 0%;
+
+    background-color: black;
+               
+    /* Set a specific height */
+    min-height: 500px;
+    height: 300vh;
+    
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+.box1 {
+    background-image: url('https://images.unsplash.com/photo-1591109864300-46c417fa0475?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+                ; background-repeat: no-repeat; background-size: cover;
+    height: 100vh;
+
+}
+.mascara{
+    background-image: linear-gradient(rgb(0,0,0,0.95), rgb(0,0,0,0), rgb(0,0,0,0.95));
+    height: 100%;
+}
+.mascara2{
+    background-image: linear-gradient(rgb(0,0,0,1), rgb(0,0,0,0), rgb(0,0,0,0.95));
+    height: 100%;
+}
+.box2 {
+
+    background-image: linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95));
+    color: white;
+    height: 100vh;
+}
+.box3 {
+    background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    height: 100vh;
+}
+
+
+.header {
+    z-index: inherit;
+    color: white;
+    width: 100%;
+    height: 85px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.centro {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    gap: 12px;
+}
+.conteudo {
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255, .15);
+    color: white;
+    width: 45%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.conteudo_img {
+    background-color: rgb(255, 255, 255, .15);
+    color: white;
+    width: 290px;
+    height: 386px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+
+}
+.conteudo_img:hover{
+    cursor: pointer;
+    transition: 0.1s;
+    transform: scale(1.06);
+    box-shadow: 1px 1px 8px 8px #D9D9D9;
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+.login:hover {
+        transition: 0.1s;
+        transform: scale(1.08);
+        cursor: pointer;
+    
+}
+.sobre:hover {
+    transition: 0.1s;
+    transform: scale(1.08);
+    cursor: pointer;
+
+    }
+.cadastro:hover {
+    transition: 0.1s;
+    transform: scale(1.08);
+    cursor: pointer;
+
+}
+.box2 .conteudo{
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    background-color: transparent;
+    align-items: center;
+}
+.box2 .conteudo p{
+    text-align: center;
+
+}
+.box2 .conteudo img {
+    width: 275px;
+    border-radius: 10px;
+}
+
+
+.conteudo p {
+    text-align: center;
+}
+
+.alinha_imagem {
+    
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.bo2 {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255, .50);
+    color: white;
+    width: 45%;
+    height: 80%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.lol {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255, .50);
+    color: white;
+    width: 45%;
+    height: 80%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.ark {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255, .50);
+    color: white;
+    width: 45%;
+    height: 80%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+ .botao {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.botao button {
+    background-color: rgb(255, 255, 255, .15);
+    color: white;
+}
+.box2 button:hover{
+    cursor: pointer;
+}

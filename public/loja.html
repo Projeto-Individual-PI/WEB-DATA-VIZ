@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/loja.css">
+    <title>Loja</title>
+</head>
+
+<body>
+    
+        <div class="box1">
+            <div class="mascara">
+                <div class="header">
+                    <div style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    width: 100%;
+                    gap: 50px;"
+                    class="opcoes">    
+
+                    <!-- <div class="login">
+                        <a href="./login.html">
+                            Login
+                        </a>
+                    </div>   -->
+                    <div class="sobre">
+                        <a href="./home_logada.html">
+                            
+                            Home
+                        </a>
+                    </div>
+<!-- 
+                    <div class="cadastro">
+                        <a href="./cadastro.html">
+
+                            Cadastro
+                        </a>
+                    </div> -->
+                
+                    </div>
+                </div>
+
+                <div class="painel">
+                    <div class="header"><p id="creditos_p">Créditos: </p></div>
+                    <div class="mensagem">
+                        <table> 
+                            <thead>
+                                <tr>
+
+                                    <th>Comum</th>
+                                    <th>Incomum</th>
+                                    <th>Raro</th>
+                                    <th>Épico</th>
+                                    <th>Lendário</th>
+                                </tr>
+                                </thead>
+                            <tbody id="tabela"></tbody>
+                        </table>
+                    </div>                        
+                        <div class="mensagem2" id="div_premio">
+                        </div>
+                    <div class="bau" id="bau">
+                        <img  onclick="abrir_bau(sessionStorage.inventario_creditos)" id ='img_bau'  alt="bau-icon">
+                         
+                    </div>
+                    <div id="inventario_msg" class="mensagem_inventario"></div>
+                </div>
+                </div>
+
+            </div>
+        </div>
+</body>
+</html>
+<script src="./js/sessao.js"></script>
+<script src="./js/loja.js"></script>
+<script>
+    // window.onload = 
+    window.onload =  () => {
+        Autenticar_Usuario(sessionStorage.ID_USUARIO, sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO);
+        Carregar_Inventario();
+        
+
+        
+       
+    }
+
+function exibir_creditos() {
+    creditos_p.innerHTML = `Creditos: ${sessionStorage.inventario_creditos}`
+}
+
+
+
+var controlador = 0
+    var estado_bau = 'fechado'
+    img_bau.src = '../assets/img-icons/bau-fechado.png'
+    var vezes = 0
+    var comuns = 0
+    var incomuns = 0
+    var epicos = 0
+    var raros = 0
+    var lendarios = 0
+    var inventario = []
+    
+
+
+    function abrir_bau(creditos) {
+            if (estado_bau == 'fechado' && creditos > 0 && controlador == 0){
+            reduzir_credito();
+            creditos_p.innerHTML = `Creditos: ${creditos}`
+            estado_bau = 'aberto'
+            atualiza_bau();
+            gacha();
+        }
+    }
+
+
+  
+    
+    function atualiza_bau() {
+        // console.log(estado_bau)
+        if (estado_bau == 'fechado')
+        {
+            bau.classList.toggle('bau_aberto')
+            img_bau.src = '../assets/img-icons/bau-fechado.png'
+            controlador = 0
+        }else {
+            img_bau.src = "../assets/img-icons/bau-aberto.png"
+            controlador = 1
+
+        }
+    }
+
+
+    function gacha(){   
+        var mensagem_tabela = ''
+        var mensagem_retirado = ''
+        var gacha = Number((Math.random() * 99 + 1).toFixed(0))
+        var comum = '<span class="comum">COMUM</span>'
+        var incomum = '<span class="incomum">INCOMUM</span>'
+        var raro = '<span class="raro">RARO</span>'
+        var epico = '<span class="epico">EPICO</span>'
+        var lendario = '<span class="lendario">LENDARIO</span>'
+
+        //comum - 60 incomum  25 raro  10 - epico  4 - lendario  1
+
+        var comum_numero = [] // 60%
+        var incomum_numero = [] // 25%
+        var raro_numero = [] //10%
+        var epico_numero = [] // 4%
+        var lendario_numero = [] //1%
+
+        var comum_premio = ['Camiseta rasgada', 'Boné encardido', 'Tampa de Garrafa', 'Óculos sem lente']
+        var incomum_premio = ['INCOMUM A','INCOMUM B','INCOMUM C','INCOMUM D']
+        var raro_premio = ['RARO A','RARO B','RARO C','RARO D']
+        var epico_premio = ['ÉPICO A','ÉPICO B','ÉPICO C','ÉPICO D']
+        var lendario_premio = ['Lendário A','Lendário B','Lendário C','Lendário D']        
+        
+
+        for (var i = 1; i <= 100; i++){
+            
+            if(i <= 60){
+                comum_numero.push(i)
+            } else if (i <= 85){
+                incomum_numero.push(i)
+            } else if (i <= 95) {
+                raro_numero.push(i)
+
+            } else if (i <= 99) {
+                epico_numero.push(i)
+
+            } else {
+                lendario_numero.push(i)
+            }
+            
+        }
+
+
+        
+        if (raro_numero.indexOf(gacha) >= 0) {
+            var x = raro_premio.length - 1
+            var i = Number((Math.random() * x).toFixed(0))
+            var frase = `${raro_premio[i]}`
+            var retirado = raro
+            vezes++
+            raros++
+            inventario.push(raro_premio[i])
+        
+        }
+        else if (comum_numero.indexOf(gacha) >= 0) 
+        {
+            var x = comum_premio.length - 1
+            var i = Number((Math.random() * x).toFixed(0))
+            var frase = `${comum_premio[i]}`
+            var retirado = comum
+            comuns++
+            vezes++
+            inventario.push(comum_premio[i])
+
+
+        } else if (incomum_numero.indexOf(gacha) >= 0) 
+        {
+            var x = incomum_premio.length - 1
+            var i = Number((Math.random() * x).toFixed(0))
+            var frase = `PREMIO RETIRADO: ${incomum_premio[i]}`
+            var retirado = incomum
+            incomuns++
+            vezes++
+            inventario.push(incomum_premio[i])
+
+
+        }else if (epico_numero.indexOf(gacha) >= 0) 
+        {
+            var x = epico_premio.length - 1
+            var i = Number((Math.random() * x).toFixed(0))
+            var frase = `${epico_premio[i]}`
+            var retirado = epico
+            epicos++
+            vezes++
+            inventario.push(epico_premio[i])
+
+
+        }else {
+            var x = lendario_premio.length - 1
+            var i = Number((Math.random() * x).toFixed(0))
+            var frase = `${lendario_premio[i]}`
+            var retirado = lendario
+            lendarios++
+            vezes++
+            inventario.push(lendario_premio[i])
+
+        }
+        
+        mensagem_tabela += `
+        <tr>
+        <td>${comuns}</td>        
+        <td> ${incomuns}</td>
+        <td>${raros}</td>
+        <td>${epicos}</td>
+        <td>${lendarios}</td>
+        </tr>
+        `
+        
+        tabela.innerHTML = mensagem_tabela;
+
+        div_premio.innerHTML = `Item Retirado: ${retirado} - ${frase}`;
+
+        inventario_msg.innerHTML = `Seu inventário: ${inventario}`
+        setTimeout(atualiza_bau, 1000)
+        estado_bau = 'fechado'
+
+        bau.classList.toggle('bau_aberto')
+        
+    }
+   
+
+
+  async  function Carregar_Inventario(){
+   const Id_usuario = sessionStorage.ID_USUARIO;
+    await fetch("/usuarios/inventario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                IdUsuario: Id_usuario
+            })
+        }).then(function (resposta) {
+            // console.log("ESTOU NO THEN DO entrar()!")
+            
+
+            if (resposta.ok) {
+                // console.log('minha resposta sem json é :' + resposta);
+                // console.log('minha resposta com json é:' + json);
+                // console.log(inventario);
+                resposta.json().then(inventario => {
+                    sessionStorage.inventario_id = inventario[0].fkusuario;
+                    sessionStorage.inventario_creditos = inventario[0].creditos;
+                    exibir_creditos();
+
+                });
+
+            } else {
+                console.log("Houve um erro ao tentar carregar o inventario!");
+                // resposta.text().then(texto => {
+                //     console.error(texto);
+                //     finalizarAguardar(texto);
+                // });
+            }
+
+        }).catch(function (erro) {
+            console.log('erro');
+        })
+        
+    }
+    
+    async function reduzir_credito(){
+        var inventario_id = sessionStorage.inventario_id;
+        var creditos_atuais = sessionStorage.inventario_creditos;
+
+        var creditos_novos = creditos_atuais - 1;
+    await fetch("/usuarios/reduzir_credito", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                IdInventario: inventario_id,
+                Creditos_atuais: creditos_novos
+
+            })
+        }).then(function (resposta) {
+            // console.log("Irei reduzir os creditos!")
+            if (resposta.ok) {
+                // console.log('minha resposta sem json é :' + resposta);
+                // console.log('minha resposta com json é:' + json);
+                // console.log(inventario);
+                resposta.json().then(credito => {
+                    // console.log(credito);
+                    Carregar_Inventario();
+                    exibir_creditos();
+
+                    
+                });
+
+            } else {
+                console.log("Houve um erro ao tentar atualizar os creditos!");
+                // resposta.text().then(texto => {
+                //     console.error(texto);
+                //     finalizarAguardar(texto);
+                // });
+            }
+
+        }).catch(function (erro) {
+            console.log('erro');
+        })
+    
+}
+</script>
+
+

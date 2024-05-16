@@ -1,0 +1,226 @@
+
+@keyframes animacao_lendario {
+    0% {
+        color: red;
+    }
+    20% {
+        color: orange;
+    }
+    40% {
+        color: yellow;
+    }
+    60% {
+        color: green;
+    }
+    80% {
+        color: blue;
+    }
+    100% {
+        color: violet;
+    }
+}
+@keyframes animacao_epico {
+    from {
+        color: lightblue;
+        
+    }
+    to {
+        color: purple;
+    }
+    
+}
+
+
+.comum {
+    color: grey;
+}
+.incomum{
+    color: blue;
+}
+.raro {
+    color: orange;
+}
+.epico{
+    animation-name: animacao_lendario;
+    animation-duration: 2s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+.lendario{
+    animation-name: animacao_lendario;
+    animation-duration: 2s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+.box1 {
+    background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    ; background-repeat: no-repeat; background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.bau {
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bau img {
+    width: 10%;
+    height: 60%;
+}
+.mensagem {
+    height: auto;
+    min-height: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+.mensagem2 {
+    height: auto;
+    min-height: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+.mensagem table{
+    width: 100%;
+    
+}
+.mensagem td, th {
+    text-align: center;
+    padding: 8px;
+  }
+
+
+.mensagem span{
+    margin-left: 5%;
+
+}
+
+.mensagem_inventario {
+
+        height: auto;
+        min-height: 15vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+}
+.bau img:hover {
+    cursor: pointer;
+    transition: 0.15s;
+    transform: scale(1.08);
+}
+.bau_aberto img{    
+    transition: 1s;
+    width: 15%;
+}
+
+
+        
+        
+
+body {
+  
+    margin: 0%;
+    padding: 0%;
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    
+}
+
+.header {
+    z-index: inherit;
+    color: white;   
+    width: 100%;
+    height: 85px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+.input a {
+    text-decoration: underline;
+    color: blue;
+}
+.login a {
+    text-decoration: underline;
+}
+.login:hover {
+        transition: 0.1s;
+        transform: scale(1.08);
+        cursor: pointer;
+    
+}
+.sobre:hover {
+    transition: 0.1s;
+    transform: scale(1.08);
+    cursor: pointer;
+
+    }
+.cadastro:hover {
+    transition: 0.1s;
+    transform: scale(1.08);
+    cursor: pointer;
+
+}
+.mascara{
+    background-image: linear-gradient(rgb(0,0,0,0.95), rgb(0,0,0,0), rgb(0,0,0,0.95));
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.painel {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    min-height: 70vh;
+    height: auto;
+    width: 50%;
+    border-radius: 15px;
+    background-color: rgba(75, 41, 224, 0.90);
+    border: white solid 5px;
+    color: white;
+    
+}
+.painel .header {
+    background-color: grey;
+    color: white;
+    height: 6vh;
+}
+.painel .texto {
+    font-size: 30px;
+    align-items: end;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    height: 30%;
+}

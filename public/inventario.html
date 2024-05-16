@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventário</title>
+   <link rel="stylesheet" href="./css/inventario.css">
+   <script src="./js/sessao.js"></script>
+</head>
+<body>
+
+    <div class="container">
+
+
+    <div class="box1">
+
+        <div class="mascara">
+                <div class="header">
+                        <div style="
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100%;
+                            width: 100%;
+                            gap: 50px;"
+                            class="opcoes">    
+
+                            <div class="login">
+                                <a href="./inventario.html">
+                                    Inventário
+                                </a>
+                            </div>  
+                            <div class="sobre">
+                                <a href="./home_logada.html">
+                                    Home
+                                </a>
+                            </div>
+
+                            <div class="cadastro">
+                                <a href="./loja.html">
+
+                                    Loja
+                                </a>
+                            </div>
+                        
+                            </div>
+                    
+                </div>
+    
+                <div class="centro">
+                        <div class="conteudo">
+                            <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam culpa rem atque. Assumenda aliquid minus nihil fuga, voluptatibus, nam veniam quam vitae temporibus necessitatibus esse! Natus exercitationem blanditiis quas aliquam.
+                            </p>
+                        </div>
+                    
+                </div>
+         </div>
+
+    </div>
+    <div class="box2" id="box2">
+        <div class="centro">
+            <div class="conteudo">
+
+                <h1>EXPLORE THE WORLD</h1>
+                
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem eum optio quia fuga perferendis repellat maxime itaque illum ducimus voluptate, hic esse et quam, possimus odio eius consequatur maiores ab.</p>
+
+                
+                <div class="bo2" id="bo2_painel">
+                    <div class="botao">
+
+                    <button onclick="fechar(this)" id="bo2_fechar">
+                        X
+                    </button>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni totam provident rerum quia modi? Odio veritatis velit qui doloribus sunt quis, ea sed culpa ipsum iste illo ullam voluptatibus officiis?</p>
+                    
+                </div>
+                <div class="lol" id="lol_painel">
+                    <div class="botao">
+
+                    <button onclick="fechar(this)" id="lol_fechar">
+                        X
+                    </button>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis provident, eaque, suscipit atque ex praesentium asperiores dolor harum fugit veniam distinctio eum inventore sint quas est odio nobis voluptatibus dignissimos.</p>
+                    </div>                    
+                </div>
+                <div class="ark" id="ark_painel">
+                    <div class="botao">
+                        <button onclick="fechar(this)" id="ark_fechar">
+                            X
+                        </button>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis omnis mollitia quisquam exercitationem recusandae, quis, veniam eligendi inventore neque quaerat amet, esse quae nesciunt ad quos! Aliquam magnam ducimus voluptatum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate at necessitatibus id natus deleniti cumque laborum, fugiat numquam alias error iste ab facilis ipsum optio, cum consequatur officia molestias culpa?</p>
+
+                    </div>
+
+                    
+                </div>
+                <div class="alinha_imagem">
+                        <div class="conteudo_img" onclick="detalhamento(this)" id="lol">
+                            <img src="https://theme.zdassets.com/theme_assets/43400/87a1ef48e43b8cf114017e3ad51b801951b20fcf.jpg" alt="lol logo">
+                        </div>
+                        <div class="conteudo_img" onclick="detalhamento(this)" id="bo2">
+                            <img src="https://upload.wikimedia.org/wikipedia/pt/5/50/Black_ops_2_cover.jpg" style="height: 365px;" alt="lol logo">
+                        </div>
+                        <div class="conteudo_img" onclick="detalhamento(this)" id="ark">
+            
+                            <img src="https://upload.wikimedia.org/wikipedia/pt/d/d0/Ark_Survival_Evolved_%C3%ADcone_digital_Nintendo_Switch_Studio_Wildcard.png" style="height: 350px;" alt="lol logo">
+                        </div>
+                  </div>
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis tempora, tempore, fugit sint consequuntur placeat, voluptate ut natus dolores odit odio! Rem maxime, laudantium molestiae iste nemo rerum ex ipsum?</p>  
+            </div>
+        </div>
+    </div>
+    <div class="box3">
+            <div class="mascara2">
+                <div class="centro">
+                    <div class="conteudo">
+                        <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam culpa rem atque. Assumenda aliquid minus nihil fuga, voluptatibus, nam veniam quam vitae temporibus necessitatibus esse! Natus exercitationem blanditiis quas aliquam.
+                        </p>
+                    </div>
+                
+                </div>
+        
+            </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+<script>
+    // window.onload = Autenticar_Usuario(sessionStorage.ID_USUARIO, sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO);
+    function detalhamento(jogo) {
+        
+        if(jogo.id == 'lol') {
+            
+                lol_painel.style.display = 'flex'
+                                        lol.style.display = 'none'
+                                        bo2.style.display = 'none'
+                                        ark.style.display = 'none'
+                                        setTimeout(function(){
+                    lol_painel.style.opacity = "1";
+                                        
+                                    }, 250);
+                box2.style.backgroundImage = "url('https://s1.picswalls.com/wallpapers/2015/11/21/beautiful-league-of-legends-wallpaper_111229615_289.jpg')"
+                                
+            
+            
+        }else if (jogo.id == 'bo2') {
+            bo2_painel.style.display = 'flex'
+            lol.style.display = 'none'
+            bo2.style.display = 'none'
+            ark.style.display = 'none'
+            setTimeout(function(){
+                                    bo2_painel.style.opacity = "1";
+                                        
+                                  }, 250);
+                                  
+            box2.style.backgroundImage = "url('../assets/bo2.jpg')"
+            
+        }else {
+            ark_painel.style.display = 'flex'
+            lol.style.display = 'none'
+            bo2.style.display = 'none'
+            ark.style.display = 'none'
+            setTimeout(function(){
+                                    ark_painel.style.opacity = "1";
+                                        
+                                 }, 250);
+            box2.style.backgroundImage = "url('https://www.gamewallpapers.com/wallpapers_slechte_compressie/wallpaper_ark_survival_evolved_02_1920x1080.jpg')"
+
+            
+        }
+    }
+    function fechar(nome) {
+        if (nome.id == 'bo2_fechar') {
+            bo2_painel.style.opacity = '0'
+            setTimeout(function() {
+                                        bo2_painel.style.display = 'none'
+                                        lol.style.display = 'flex'
+                                        bo2.style.display = 'flex'
+                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
+                                    }, 250);
+            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
+
+        } else if (nome.id == 'lol_fechar') {
+            
+            lol_painel.style.opacity = "0"; // Configura a opacidade para 0 para iniciar a transição
+            setTimeout(function() {
+                                        lol_painel.style.display = 'none'
+                                        lol.style.display = 'flex'
+                                        bo2.style.display = 'flex'
+                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
+                                    }, 250); // Espera 500 milissegundos (0.5 segundos) para garantir que a transição seja concluída
+            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
+                            
+            
+        } else {
+            ark_painel.style.opacity = '0'
+            setTimeout(function() {
+                                        ark_painel.style.display = 'none'
+                                        lol.style.display = 'flex'
+                                        bo2.style.display = 'flex'
+                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
+                                    }, 250);
+            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
+
+        }
+    
+
+      
+
+    }
+</script>
