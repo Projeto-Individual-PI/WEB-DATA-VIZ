@@ -1,9 +1,14 @@
+@font-face {
+    font-family: 'TT Commons Regular';
+    src: url('../assets/fonts/TT\ Commons\ Regular.otf') format('otf');
+}
 
 
         
         
 
 body {
+    font-family: 'TT Commons Regular', sans-serif;
   
     margin: 0%;
     padding: 0%;
@@ -13,6 +18,7 @@ body {
     /* Set a specific height */
     min-height: 500px;
     height: 300vh;
+    
     
     background-attachment: fixed;
     background-position: center;
@@ -33,6 +39,7 @@ body {
 
 .box1 {
     background-image: url('https://images.unsplash.com/photo-1591109864300-46c417fa0475?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+    
                 ; background-repeat: no-repeat; background-size: cover;
     height: 100vh;
 

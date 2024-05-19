@@ -3,7 +3,7 @@ var database = require("../database/config")
 function autenticar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucaoSql = `
-        SELECT id as id_usuario, usuario, email FROM usuario WHERE email = '${email}' AND senha = '${senha}';
+        SELECT id, usuario, email FROM usuario WHERE email = '${email}' AND senha = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -23,25 +23,90 @@ function cadastrar(usuario, email, senha) {
 }
 
 function inventario(id_usuario) {
-    console.log(`ACESSEI O INVENTARIO DO USUARIO ${id_usuario}`);
+    // console.log(`ACESSEI O INVENTARIO DO USUARIO ${id_usuario}`);
     var instrucaoSql = `
-        Select * from inventario where fkusuario = ${id_usuario}
+    Select fkusuario, creditos, group_concat(idbau), count(fkbau) as qtd_baus,fkbau, nome from inventario
+    left join baus_inventario on fkinventario = fkusuario where fkusuario = ${id_usuario}
+    group by fkusuario, creditos, fkbau, nome;
     `;
-    console.log('Executando a instrução SQL: \n' + instrucaoSql);
+    // console.log('Executando a instrução SQL: \n' + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-
+function criar_inventario(id_usuario) {
+    // console.log(`VOU CRIAR O INVENTARIO DO USUARIO ${id_usuario}`);
+    var instrucaoSql = `
+        insert into inventario values (${id_usuario}, 100)
+    `;
+    // console.log('Executando a instrução SQL: \n' + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function pesquisar_bau_usuario(idusuario, fkbau){
+    // console.log(`Irei consultar o bau ${fkbau} do usuario ${idusuario}!`)
+    var instrucaoSql = `select idbau from baus_inventario where fkinventario = ${idusuario} and fkbau = ${fkbau} order by idbau desc limit 1`
+    // console.log('Executando a instrução SQL: \n' + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 function reduzir_credito(fk_usuario, creditos_atuais) {
-    console.log(`Irei reduzir os creditos do usuario de id: ${fk_usuario} para ${creditos_atuais}`);
+    // console.log(`Irei reduzir os creditos do usuario de id: ${fk_usuario} para ${creditos_atuais}`);
     var instrucaoSql = `
         update inventario set creditos = ${creditos_atuais} where fkusuario = ${fk_usuario}
     `;
     // console.log('Executando a instrução SQL: \n' + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function reduzir_bau(fk_usuario, baus_atuais, fkbau) {
+    // console.log(`Irei remover o bau de id ${baus_atuais} e de fkbau ${fkbau} do usuario de id: ${fk_usuario}`);
+    var instrucaoSql = `
+    delete from baus_inventario where fkinventario = ${fk_usuario} and fkbau = ${fkbau} and idbau = ${baus_atuais};
+    `;
+    // console.log('Executando a instrução SQL: \n' + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function enviar_item(idinventario, iditem, fkitem) {
+    var instrucaoSql = `
+    Insert into itens_inventario (iditem,fkinventario,fkitem) values (${iditem}, ${idinventario}, ${fkitem});
+    `
+    return database.executar(instrucaoSql);
+
+}
+function enviar_bau(idusuario, fkbau, idbau, nome){
+    // console.log(`irei enviar o bau de nome ${nome}, de id ${idbau} e de fk ${fkbau} para o inventario do usuario de id ${idusuario}`)
+    var instrucaoSql = `
+    insert into baus_inventario values (${idbau}, ${fkbau}, ${idusuario}, '${nome}')
+    `
+    return database.executar(instrucaoSql);
+}
+function consultar_bau(idbau) {
+    var instrucaoSql = `
+    Select * from loja_baus where idbau = ${idbau}`
+    return database.executar(instrucaoSql);
+
+}
+function retirar_premio(raridade){
+    var instrucaoSql = `
+    select * from estoque_itens where raridade = '${raridade}'
+    `;
+    console.log(instrucaoSql)
+    return database.executar(instrucaoSql);
+}
+function consultar_item(idusuario){
+    var instrucaoSql = `
+    select iditem from itens_inventario where fkinventario = ${idusuario} order by iditem desc limit 1
+    `;
+    // console.log(instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 module.exports = {
     autenticar,
     cadastrar,
     inventario,
-    reduzir_credito
+    reduzir_credito,
+    enviar_item,
+    criar_inventario,
+    consultar_bau,
+    consultar_item,
+    reduzir_bau,
+    pesquisar_bau_usuario,
+    enviar_bau,
+    retirar_premio
 };

@@ -47,14 +47,61 @@
                     
                 </div>
     
-                <div class="centro">
-                        <div class="conteudo">
-                            <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam culpa rem atque. Assumenda aliquid minus nihil fuga, voluptatibus, nam veniam quam vitae temporibus necessitatibus esse! Natus exercitationem blanditiis quas aliquam.
-                            </p>
+                <div class="painel" id="painel">
+                    <div class="header">
+                        <div class="mensagem3" id="mensagem_creditos">
                         </div>
-                    
+                    </div>
+                    <div class="mensagem">
+                    </div>                        
+                       
+
+                        <div class="baus">
+
+                    <div class="bau" id="bau1">
+                        <span id="normal">
+                        </span>
+                        <img  src="../assets/img-icons/bau-fechado.png" onclick="fechar_painel()" id ='img_bau1'  alt="bau-icon">     
+                    </div>
+                    <span id="raro">
+                    </span>
+                    <div class="bau" id="bau2">
+                        <span id="lendario">
+                        </span>
+                        <img src="../assets/img-icons/bau-fechado.png" onclick="fechar_painel()" id ='img_bau2'  alt="bau-icon">     
+                    </div>
+                    <div class="bau" id="bau3">
+                        <img src="../assets/img-icons/bau-fechado.png"  onclick="fechar_painel()" id ='img_bau3'  alt="bau-icon">     
+                    </div>
                 </div>
+                    
+                    <div id="inventario_msg" class="mensagem_inventario">
+                        <span>Clique no baú para abrir!</span>
+                    </div>
+                </div>
+
+
+                <div class="painel2" id="painel2">
+                    <div class="header">
+                        <div class="mensagem3" id="creditos_p">
+                            
+                        </div>
+                        <button onclick="fechar_painel2()">X</button>
+                    </div>
+                    <div class="mensagem" id="mensagem">
+                       
+                    </div>                        
+                        <div class="mensagem2" id="div_premio">
+                        </div>
+                    <div class="bau" id="bau4">
+                     
+                         
+                    </div>
+                    <div id="inventario_msg" class="mensagem_inventario">
+                        <span>Clique no baú para abrir!</span>
+                    </div>
+                </div>
+                
          </div>
 
     </div>
@@ -131,7 +178,81 @@
 
 </body>
 </html>
+<script src="./js/loja.js"></script>
 <script>
+
+
+window.onload =  () => {
+        Autenticar_Usuario(sessionStorage.ID_USUARIO, sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO);
+        Carregar_Inventario(sessionStorage.ID_USUARIO);
+        Painel_Baus();
+        painel.style.display = 'flex';
+        bau1.style.display = 'flex';
+        bau2.style.display = 'flex';
+        bau3.style.display = 'flex';
+
+    setTimeout(() => {
+        painel.classList.toggle("visible_painel")
+        bau1.classList.toggle("visible_bau")
+        bau2.classList.toggle("visible_bau")
+        bau3.classList.toggle("visible_bau")
+
+        exibir_creditos(sessionStorage.inventario_creditos);
+
+    },200);
+
+    }
+
+    function Painel_Baus(){
+        if (sessionStorage.Usuario_baus == 0){
+            bau1.innerHTML = `<span> Baús <span class="normal">Normais<span>: 0</span> 
+            <img  src="../assets/img-icons/bau-fechado.png" onclick="fechar_painel()" id ='img_bau1'  alt="bau-icon"> `
+            bau2.innerHTML = `<span> Baús <span class="raro">Raros<span>: 0</span> 
+            <img  src="../assets/img-icons/bau-fechado.png" onclick="fechar_painel()" id ='img_bau2'  alt="bau-icon"> `
+            bau3.innerHTML = `<span> Baús <span class="lendario">Lendários</span>: 0</span> 
+            <img  src="../assets/img-icons/bau-fechado.png" onclick="fechar_painel()" id ='img_bau3'  alt="bau-icon"> `
+
+        }else {
+            var qtd_bau_comum = 0;
+            var qtd_bau_raro = 0;
+            var qtd_bau_lendario = 0;
+
+            var Baus_atuais_objeto = JSON.parse(sessionStorage.getItem('Usuario_baus'));
+            if (Baus_atuais_objeto.length < 3){
+                for (var i = 0; i < Baus_atuais_objeto.length; i++){
+                    if (Baus_atuais_objeto[i].fk == 1){
+                        console.log('Comum')
+                        qtd_bau_comum = Baus_atuais_objeto[i].qtd
+                        console.log(qtd_bau_comum)
+                    }else if (Baus_atuais_objeto[i].fk == 2){
+                        console.log('Raro')
+                        qtd_bau_raro = Baus_atuais_objeto[i].qtd
+                        console.log(qtd_bau_raro)
+                    }if (Baus_atuais_objeto[i].fk == 3){
+                        console.log('Lendário')
+                        qtd_bau_lendario = Baus_atuais_objeto[i].qtd
+                        console.log(qtd_bau_lendario)
+                    }
+                }
+            }else {
+                qtd_bau_comum = Baus_atuais_objeto[0].qtd
+                qtd_bau_raro = Baus_atuais_objeto[1].qtd
+                qtd_bau_lendario = Baus_atuais_objeto[2].qtd
+
+            }
+
+
+            
+            bau1.innerHTML = `<span> Baús <span class="normal">Comuns</span>: ${qtd_bau_comum > 0 ? qtd_bau_comum : '0'}</span> 
+            <img  src="../assets/img-icons/bau-fechado.png" onclick="fechar_painel(this.id)" id ='img_bau1'  alt="bau-icon"> `
+            bau2.innerHTML = `<span> Baús <span class="raro">Raros</span>: ${qtd_bau_raro > 0 ? qtd_bau_raro : '0'}</span> 
+            <img  src="../assets/img-icons/bau-fechado.png" onclick="fechar_painel(this.id)" id ='img_bau2'  alt="bau-icon"> `
+            bau3.innerHTML = `<span> Baús <span class="lendario">Lendários</span>: ${qtd_bau_lendario > 0 ? qtd_bau_lendario : '0'}</span> 
+            <img  src="../assets/img-icons/bau-fechado.png" onclick="fechar_painel(this.id)" id ='img_bau3'  alt="bau-icon"> `
+        
+    }        
+
+    }
     // window.onload = Autenticar_Usuario(sessionStorage.ID_USUARIO, sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO);
     function detalhamento(jogo) {
         
@@ -210,8 +331,291 @@
 
         }
     
+    }
+
+    var controlador = 0
+    var estado_bau = 'fechado'
+    var vezes = 0
+    var comuns = 0
+    var incomuns = 0
+    var epicos = 0
+    var raros = 0
+    var lendarios = 0
+    var inventario = []
+    
+
+
+
+async function fechar_painel(id){
+ var escolha = ''
+    try {
+        if(id == 'img_bau1'){
+            escolha = '1'
+        }else if (id == 'img_bau2'){
+             escolha = '2'
+        }else if (id == 'img_bau3') {
+             escolha = '3'        }
+
+    
+    var bau_escolhido = await consultar_bau(escolha);
+    }catch (erro){
+        console.log('erro: ' + erro)
+    }
+
+
+ painel.classList.toggle("visible_painel")
+ bau1.classList.toggle("visible_bau")
+ bau2.classList.toggle("visible_bau")
+ bau3.classList.toggle("visible_bau")
+
+ setTimeout(() => {
+     painel.style.display = 'none';
+     bau1.style.display = 'none';
+     bau2.style.display = 'none';
+     bau3.style.display = 'none';
+     
+     painel2.style.display = 'flex';
+     bau4.style.display = 'flex';
+
+     setTimeout(() => {
+         painel2.classList.toggle("visible_painel2")
+         bau4.classList.toggle("visible_bau")
+         bau4.innerHTML = `<img  onclick='abrir_bau(${JSON.stringify(bau_escolhido)})' id ='img_bau4'  alt="bau-icon">`;
+         img_bau4.src = '../assets/img-icons/bau-fechado.png'
+         mensagem.innerHTML = ` 
+         <p style="text-align: center;">${bau_escolhido.nome}</p>
+         <table> 
+         <thead>
+             <tr>
+                 <th><span class="comum">Comum</span> - ${bau_escolhido.porcent_comum}%</th>
+                 <th><span class="incomum">Incomum</span> - ${bau_escolhido.porcent_incomum}%</th>
+                 <th><span class="raro">Raro</span> - ${bau_escolhido.porcent_raro}%</th>
+                 <th><span class="epico">Épico</span> - ${bau_escolhido.porcent_epico}%</th>
+                 <th><span class="lendario">Lendário</span> - ${bau_escolhido.porcent_lendario}%</th>
+             </tr>
+             </thead>
+         <tbody id="tabela"></tbody>
+     </table>`;
+        
+
+
+     },200);
+
+ },750);
+
+
+}
+
+   
+    function abrir_bau(bau_escolhido) {
+        var Baus_atuais_objeto = JSON.parse(sessionStorage.getItem('Usuario_baus'));
+        var posso_abrir = false;
+        var qtd_baus = 0
+        if (Baus_atuais_objeto.length < 3){
+                for (var i = 0; i < Baus_atuais_objeto.length; i++){
+
+                    if (Baus_atuais_objeto[i].fk == 1 && bau_escolhido.idBau == 1){
+                            posso_abrir = true;
+                             qtd_baus = Baus_atuais_objeto[i].qtd 
+
+
+                    }else if (Baus_atuais_objeto[i].fk == 2 && bau_escolhido.idBau == 2){
+                            posso_abrir = true;
+                             qtd_baus = Baus_atuais_objeto[i].qtd 
+                        
+
+                    }if (Baus_atuais_objeto[i].fk == 3 && bau_escolhido.idBau == 3){
+                        posso_abrir = true;
+                         qtd_baus = Baus_atuais_objeto[i].qtd 
+
+
+                    }
+                }
+
+            }else {
+                for(var i = 0; i < Baus_atuais_objeto.length; i++){
+                    if (Baus_atuais_objeto[i].qtd > 0){
+                        posso_abrir = true;
+                        qtd_baus = Baus_atuais_objeto[i].qtd;
+                    }
+                    
+                }
+            }
+
+
+            console.log(bau_escolhido);
+        if (estado_bau == 'fechado'  && controlador == 0 && posso_abrir){
+            // console.log(Baus_atuais_objeto);
+
+            estado_bau = 'aberto'
+            atualiza_bau();
+            gacha(bau_escolhido);
+            const usuario = sessionStorage.ID_USUARIO;
+            const fkbau = bau_escolhido.idBau;
+            // console.log(usuario);
+            // console.log(fkbau);
+            // console.log(qtd_baus);
+            reduzir_bau(usuario, fkbau, qtd_baus);
+        }else {
+            alert(`você não tem nenhum ${bau_escolhido.nome}`)
+        }
+    }
+
+
+  
+    
+    function atualiza_bau() {
+        // console.log(estado_bau)
+        if (estado_bau == 'fechado')
+        {
+            bau4.classList.toggle('bau_aberto')
+            img_bau4.src = '../assets/img-icons/bau-fechado.png'
+            controlador = 0
+        }else {
+            img_bau4.src = "../assets/img-icons/bau-aberto.png"
+            controlador = 1
+
+        }
+    }
+
+
+  async  function gacha(bau_aberto){   
+
+
+        
+        var qtd_comum = bau_aberto.porcent_comum
+        var qtd_incomum = bau_aberto.porcent_incomum
+        var qtd_raro = bau_aberto.porcent_raro
+        var qtd_epico = bau_aberto.porcent_epico
+        var qtd_lendario = bau_aberto.porcent_lendario
+     
+
+        var mensagem_tabela = ''
+        var mensagem_retirado = ''
+        var gacha = Number((Math.random() * 99 + 1).toFixed(0))
+        var comum = '<span class="comum">COMUM</span>'
+        var incomum = '<span class="incomum">INCOMUM</span>'
+        var raro = '<span class="raro">RARO</span>'
+        var epico = '<span class="epico">EPICO</span>'
+        var lendario = '<span class="lendario">LENDARIO</span>'
+
+
+        var comum_numero = [] 
+        var incomum_numero = [] 
+        var raro_numero = [] 
+        var epico_numero = [] 
+        var lendario_numero = [] 
+
+        var comum_premio = ['Camiseta rasgada', 'Boné encardido', 'Tampa de Garrafa', 'Óculos sem lente']
+        var incomum_premio = ['INCOMUM A','INCOMUM B','INCOMUM C','INCOMUM D']
+        var raro_premio = ['RARO A','RARO B','RARO C','RARO D']
+        var epico_premio = ['ÉPICO A','ÉPICO B','ÉPICO C','ÉPICO D']
+        var lendario_premio = ['Lendário A','Lendário B','Lendário C','Lendário D']        
+        
+
+        for (var i = 1; i <= 100; i++){
+            
+            if(comum_numero.length < qtd_comum){
+                comum_numero.push(i)
+            } else if (incomum_numero.length < qtd_incomum){
+                incomum_numero.push(i)
+            } else if (raro_numero.length < qtd_raro) {
+                raro_numero.push(i)
+
+            } else if (epico_numero.length < qtd_epico) {
+                epico_numero.push(i)
+
+            } else if(lendario_numero.length < qtd_lendario) {
+                lendario_numero.push(i)
+            }
+            
+        }
+
+        
+   
+        premio_retirado = '';
+         if (comum_numero.indexOf(gacha) >= 0) 
+        {
+            premio_retirado = await retirar_premio('comum');
+            var frase = `${premio_retirado.nome}`
+            var retirado = comum
+            comuns++
+            vezes++
+            Inserir_Inventario(sessionStorage.ID_USUARIO, premio_retirado.iditem)
+
+
+
+
+        } else if (incomum_numero.indexOf(gacha) >= 0) 
+        {
+            premio_retirado = await retirar_premio('incomum');
+            var frase = `${premio_retirado.nome}`
+            var retirado = incomum
+            incomuns++
+            vezes++
+            // inventario.push(incomum_premio[i])
+            Inserir_Inventario(sessionStorage.ID_USUARIO, premio_retirado.iditem)
+            
+
+
+
+        }else if (raro_numero.indexOf(gacha) >= 0) {
+            premio_retirado = await retirar_premio('raro');
+            var frase = `${premio_retirado.nome}`
+            var retirado = raro;
+            vezes++;
+            raros++;
+            // inventario.push(raro_premio[i])
+            Inserir_Inventario(sessionStorage.ID_USUARIO, premio_retirado.iditem)
+
+        
+        }else if (epico_numero.indexOf(gacha) >= 0){
+            premio_retirado = await retirar_premio('epico');
+            var frase = `${premio_retirado.nome}`
+            var retirado = epico
+            epicos++
+            vezes++
+            // inventario.push(epico_premio[i])
+            Inserir_Inventario(sessionStorage.ID_USUARIO, premio_retirado.iditem)
+
+
+
+
+        }else {
+            premio_retirado = await retirar_premio('lendario');
+            var frase = `${premio_retirado.nome}`
+            var retirado = lendario
+            lendarios++
+            vezes++
+            // inventario.push(lendario_premio[i])
+            Inserir_Inventario(sessionStorage.ID_USUARIO, premio_retirado.iditem)
+
+
+        }
+        // console.log(premio_retirado)
+        mensagem_tabela += `
+        <tr>
+        <td>${comuns}</td>        
+        <td> ${incomuns}</td>
+        <td>${raros}</td>
+        <td>${epicos}</td>
+        <td>${lendarios}</td>
+        </tr>
+        `
+        
+        tabela.innerHTML = mensagem_tabela;
+
+        div_premio.innerHTML = `Item Retirado: ${retirado} - ${frase}`;
+
+        setTimeout(atualiza_bau, 1000)
+        estado_bau = 'fechado'
+
+        bau4.classList.toggle('bau_aberto')
+       
+        
+    }
+   
 
       
 
-    }
 </script>
