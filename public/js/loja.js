@@ -1,81 +1,14 @@
 function exibir_creditos(creditos) {
-    mensagem_creditos.innerHTML = `Creditos: ${creditos}`
+    mensagem = document.getElementById('mensagem_creditos')
+    if(mensagem){
+        mensagem.innerHTML = `Creditos: ${creditos}`
+    }
+    
 }
 
 
 
-async  function Carregar_Inventario(id_usuario){
-    await fetch("/usuarios/inventario", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                IdUsuario: id_usuario
-            })
-        }).then(function (resposta) {
-            // console.log("ESTOU NO THEN DO entrar()!")
-            
 
-            if (resposta.ok) {
-                // console.log('minha resposta sem json é :' + resposta);
-                // console.log('minha resposta com json é:' + json);
-                // console.log(inventario);
-                resposta.json().then(inventario => {
-                    // console.log(inventario)
-                    sessionStorage.inventario_id = inventario[0].fkusuario;
-                    sessionStorage.inventario_creditos = inventario[0].creditos;
-                    var baus = [];
-
-                    for (var i = 0; i < inventario.length; i++){
-                        var qtd_baus = {
-                            qtd: inventario[i].qtd_baus,
-                            fk: inventario[i].fkbau,
-                            nome: inventario[i].nome
-                        }
-
-                        
-                        baus.push(qtd_baus);
-                    }
-                    baus_vazios = [
-                        {
-                            qtd: 0,
-                            fk: 1,
-                            nome: 'Baú Comum'
-                        },
-                        {
-                            qtd: 0,
-                            fk: 2,
-                            nome: 'Baú Raro'
-                        },
-                        {
-                            qtd: 0,
-                            fk: 3,
-                            nome: 'Baú Lendário'
-                        }
-
-                    ]
-                    // console.log(baus);
-                    inventario[0].fkbau == null ? sessionStorage.setItem('Usuario_baus', JSON.stringify(baus_vazios)) : sessionStorage.setItem('Usuario_baus', JSON.stringify(baus));
-                    exibir_creditos(sessionStorage.inventario_creditos);
-
-                });
-
-            } else {
-                console.log("Houve um erro ao tentar carregar o inventario!");
-                // resposta.text().then(texto => {
-                //     console.error(texto);
-                //     finalizarAguardar(texto);
-                // });
-            }
-
-        }).catch(function (erro) {
-            console.log('erro');
-        })
-
-        
- 
-    }
     
     
 
@@ -150,6 +83,7 @@ await fetch("/usuarios/reduzir_bau", {
             resposta.json().then(credito => {
                 // console.log(credito);
                 Carregar_Inventario(sessionStorage.ID_USUARIO);
+                
             });
 
         } else {
@@ -286,6 +220,7 @@ async function consultar_bau(idbau){
 
  function fechar_painel_bau_loja(){ 
     painel_bau_loja.classList.toggle("visible_painel_bau_loja")
+    confirmar_botao.classList.toggle('confirmar_botao_visivel')
     setTimeout(() => {
         painel_bau_loja.style.display = 'none';
         painel2.style.display = 'flex';

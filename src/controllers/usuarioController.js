@@ -163,6 +163,23 @@ async function cadastrar(req, res) {
     }
 }
 
+async function criar_inventario(req, res){
+    const idusuario = req.body.idusuarioserver
+
+    if (idusuario == undefined){
+        res.status(403).send('ERRO, IDUSUARIO INVALIDO!')
+    }else{
+        usuarioModel.criar_inventario(idusuario).then(
+            (data) => {
+                console.log('realizei a criação do meu inventario do usuario de id: ' + idusuario)
+                res.status(200).send(data)
+            }
+        ).catch((erro)=>{
+            console.log('erro: ' + erro)
+        });
+    }
+}
+
 async function enviar_item(req, res){
 var idinventario = req.body.IdInventarioServer;
 var fkitem = req.body.PremioServer;
@@ -254,6 +271,19 @@ function consultar_bau(req, res){
             })
         }
     }
+   async function consulta_inventario(req, res){
+        var fkinventario = req.body.idinventario
+        if (fkinventario == undefined){
+            console.log('fkinventario indefinido')
+        } else {
+            usuarioModel.consulta_inventario(fkinventario).then((data) => {
+                // console.log(data);
+                res.status(200).json(data)
+            })
+
+            
+    }
+}
 
 module.exports = {
     autenticar,
@@ -264,5 +294,7 @@ module.exports = {
     consultar_bau,
     reduzir_bau,
     enviar_bau,
-    retirar_premio
+    retirar_premio,
+    consulta_inventario,
+    criar_inventario
 }

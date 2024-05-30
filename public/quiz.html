@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="./css/quiz.css">
+</head>
+<body>
+    <div class="container">
+
+
+        <div class="box1">
+    
+            <div class="mascara">
+                    <div class="header">
+                            <div style="
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                height: 100%;
+                                width: 100%;
+                                gap: 50px;"
+                                class="opcoes">    
+    
+                                <div class="login">
+                                    <a href="./inventario.html">
+                                        Inventário
+                                    </a>
+                                </div>  
+                                <div class="sobre">
+                                    Home
+                                </div>
+    
+                                <div class="cadastro">
+                                    <a href="./loja.html">
+    
+                                        Loja
+                                    </a>
+                                </div>
+                            
+                                </div>
+                        
+                    </div>
+        
+                    <div class="centro">
+                            <div class="conteudo" style="flex-direction: column;">
+                                <p>QUIZ 1</p>
+                                <div class="pergunta" id="pergunta">PERGUNTA</div>
+                                
+                                <div class="alternativa" id="alternativa_1">ALTERNATIVA 1</div>
+
+                                <div class="alternativa" id="alternativa_2">ALTERNATIVA 2</div>
+
+
+                                <div class="alternativa" id="alternativa_3">ALTERNATIVA 3</div>
+
+
+                                <div class="alternativa" id="alternativa_4">ALTERNATIVA 4</div>
+
+
+                            </div>    
+                    </div>
+             </div>
+    
+        </div>
+       
+            </div>
+        </div>
+       
+    
+    </div>
+</body>
+</html>
+<script src="./js/sessao.js"></script>
+<script>
+    window.onload = () => {
+        Autenticar_Usuario(sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO, sessionStorage.ID_USUARIO);
+        Carregar_Quiz();
+
+    }
+
+async function Carregar_Quiz() {
+
+    
+}
+
+</script>

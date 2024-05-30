@@ -46,11 +46,20 @@
                 </div>
     
                 <div class="centro">
+                        <div class="conteudo" style="flex-direction: column;">
+                            <p>
+                            A indústria dos jogos no Brasil está em uma <span style="color: aqua;">constante crescente</span> atualmente
+                            e vem se tornando cada vez mais relevante na vida das pessoas.
+                        <br>
+                        <br>
+                             Os jogos para PC dominam o mercado brasileiro, gerando receitas significativas e atraindo cada vez mais jogadores e desenvolvedores. Este crescimento é impulsionado pela combinação de tecnologia avançada, criatividade e a crescente demanda por entretenimento digital.
+                            </p>
+                        </div>
                         <div class="conteudo">
                             <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam culpa rem atque. Assumenda aliquid minus nihil fuga, voluptatibus, nam veniam quam vitae temporibus necessitatibus esse! Natus exercitationem blanditiis quas aliquam.
                             </p>
-                        </div>
+                        </div>  
                     
                 </div>
          </div>
@@ -60,9 +69,9 @@
         <div class="centro">
             <div class="conteudo">
 
-                <h1>EXPLORE THE WORLD</h1>
+                <h1>Meus três jogos favoritos.</h1>
                 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem eum optio quia fuga perferendis repellat maxime itaque illum ducimus voluptate, hic esse et quam, possimus odio eius consequatur maiores ab.</p>
+                <p>Clique em uma das imagens para ver um pouco sobre os jogos que mais marcaram a minha vida.</p>
 
                 
                 <div class="bo2" id="bo2_painel">
@@ -107,7 +116,8 @@
                             <img src="https://upload.wikimedia.org/wikipedia/pt/d/d0/Ark_Survival_Evolved_%C3%ADcone_digital_Nintendo_Switch_Studio_Wildcard.png" style="height: 350px;" alt="lol logo">
                         </div>
                   </div>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis tempora, tempore, fugit sint consequuntur placeat, voluptate ut natus dolores odit odio! Rem maxime, laudantium molestiae iste nemo rerum ex ipsum?</p>  
+              <p>Responda algumas perguntas para ganhar <span style="color: greenyellow;">créditos</span>, com eles você pode comprar <span style="color: greenyellow;">baús</span> na loja e retirar <span style="color: greenyellow;">prêmios</span> no seu
+                inventário!</p>  
             </div>
         </div>
     </div>
@@ -129,8 +139,9 @@
 
 </body>
 </html>
+<script src="./js/loja.js"></script>
 <script>
-    window.onload = Autenticar_Usuario(sessionStorage.ID_USUARIO, sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO);
+    window.onload = Autenticar_Usuario(sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO, sessionStorage.ID_USUARIO);
     function detalhamento(jogo) {
         
         if(jogo.id == 'lol') {

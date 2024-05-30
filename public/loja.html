@@ -9,8 +9,8 @@
 
 <body>
     
-        <div class="box1">
-            <div class="mascara">
+        <div class="box1" id="box1">
+            <div class="mascara" id="mascara">
                 <div class="header">
                     <div style="
                     display: flex;
@@ -27,12 +27,13 @@
                         </a>
                     </div>  
                     <div class="sobre">
-                        Home
+                        <a href="./home_logada.html">
+                            Home
+                        </a>
                     </div>
 
                     <div class="cadastro">
                         <a href="./loja.html">
-
                             Loja
                         </a>
                     </div>
@@ -44,7 +45,7 @@
 
 
                 <div class="painel" id="painel2">
-                    <div class="header"><p>Loja</p>
+                    <div class="header" id="header"><p>Loja</p>
                     </div>
                     <div class="mensagem">
                         <p>
@@ -76,7 +77,7 @@
                         <div class="header">
                             <button onclick="fechar_painel_bau_loja()">X</button>
                         </div>
-                        <div id="confirmar">
+                        <div id="confirmar" class="confirmar">
                             
                         </div>
                     </div>
@@ -91,8 +92,7 @@
 <script>
     // window.onload = 
     window.onload =  () => {
-        Autenticar_Usuario(sessionStorage.ID_USUARIO, sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO);
-        Carregar_Inventario(sessionStorage.ID_USUARIO);
+        Autenticar_Usuario(sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO, sessionStorage.ID_USUARIO);
         painel2.style.display = 'flex';
     // bau.style.display = 'flex';
     setTimeout(() => {
@@ -110,33 +110,45 @@
 async function confirmar_escolha(escolha){
     try {
         var bau_escolhido = await consultar_bau(escolha);
+        var saldo_apos = sessionStorage.inventario_creditos - bau_escolhido.preco
     } catch (erro) {
         console.error("Erro ao confirmar a escolha:", erro);
     }
-
-
-
-
     painel2.classList.toggle("visible_painel")
     setTimeout(() => {
         painel_bau_loja.style.display = 'flex';
         confirmar.innerHTML = `<h1>Confirme a sua escolha!</h1><br>
-                             <p>Você tem certeza que deseja comprar um ${bau_escolhido.nome}?</p>
 
-                             Status do baú <br> 
-                             Preço: ${bau_escolhido.preco} créditos <br>
-                             Raridades dos itens: <br>
-                             <span class="comum">Comum</span>: ${bau_escolhido.porcent_comum}% <br>
-                             <span class="incomum">Incomum</span>: ${bau_escolhido.porcent_incomum}% <br>
-                             <span class="raro">Raro</span>: ${bau_escolhido.porcent_raro}% <br>
-                             <span class="epico">Épico</span>: ${bau_escolhido.porcent_epico}% <br>   
-                             <span class="lendario">Lendário</span>: ${bau_escolhido.porcent_lendario}% <br>
-                            <button class="confirmar_botao" onclick="realizar_compra('${bau_escolhido.preco}', '${bau_escolhido.idBau}')">CONFIRMAR</button>
+                            <div class="decisao">
+                                <div>Você tem certeza que deseja comprar um ${bau_escolhido.nome}?</div>
+                                <div>Seu saldo após a compra: <span style="color: #01C38D;"><span id="saldo_apos" value="${saldo_apos}">${saldo_apos}</span></span></div>
+                             
+                              <div style="display: flex; flex-direction: row; gap: 60px;"> 
+                                    <div style="display: flex; flex-direction: column;">
+                                        <div>Status do baú: </div> 
+                                        <div> Preço: <span style="color: #01C38D;">${bau_escolhido.preco} créditos </span></div>
+                                        <div> Raridades dos itens:  </div>
+                                        <div><span class="comum">Comum</span>: ${bau_escolhido.porcent_comum}% </div>
+                                        <div><span class="incomum">Incomum</span>: ${bau_escolhido.porcent_incomum}% </div>
+                                        <div><span class="raro">Raro</span>: ${bau_escolhido.porcent_raro}% </div>
+                                        <div><span class="epico">Épico</span>: ${bau_escolhido.porcent_epico}% </div>   
+                                        <div><span class="lendario">Lendário</span>: ${bau_escolhido.porcent_lendario}% </div>
+                                        
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;">
+                                        <div>Quantidade:</div>
+                                        <input id="quantidade" autocomplete="off" min="1" class="input_qtd" value="1" type="number" oninput="atualiza_saldo_apos(quantidade.value, ${bau_escolhido.preco})"></input>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                             <button class="confirmar_botao" id="confirmar_botao" onclick="realizar_compra('${bau_escolhido.preco}', '${bau_escolhido.idBau}', quantidade.value, saldo_apos.innerHTML)">CONFIRMAR</button>
                              
                              `;
         painel2.style.display = 'none';
         setTimeout(() => {
             painel_bau_loja.classList.toggle("visible_painel_bau_loja")
+            confirmar_botao.classList.add('confirmar_botao_visivel')
         },200)
 
     },750);
@@ -144,17 +156,108 @@ async function confirmar_escolha(escolha){
 
 
 
+function atualiza_saldo_apos(qtd, preco){
+    if(qtd >= 1){
 
-async function realizar_compra(bau_preco, bau_id) {
-    await reduzir_credito(sessionStorage.ID_USUARIO, sessionStorage.inventario_creditos, bau_preco)
-    // console.log(bau_id);
-    await enviar_bau(sessionStorage.ID_USUARIO, bau_id)
-
-    alert('COMPRA REALIZADA COM SUCESSO!!!!')
-    fechar_painel_bau_loja();
-    Carregar_Inventario(sessionStorage.ID_USUARIO);
+        saldo_apos.innerHTML = sessionStorage.inventario_creditos - (qtd * preco) 
+        saldo_apos.value = sessionStorage.inventario_creditos - (qtd * preco) 
+    }else{
+        saldo_apos.innerHTML = 'Insira um valor positivo!'
+        saldo_apos.value = 'a' 
+    }
 }
 
+
+async function realizar_compra(bau_preco, bau_id, quantidade, saldo_apos) {
+
+    if(Number(saldo_apos) >= 0){
+
+        
+        for(var i = 0; i < quantidade; i++){
+            
+                await reduzir_credito(sessionStorage.ID_USUARIO, sessionStorage.inventario_creditos, bau_preco)
+                // console.log(bau_id);
+                await enviar_bau(sessionStorage.ID_USUARIO, bau_id)
+            }
+         
+
+
+
+            compra_sucesso();
+            Carregar_Inventario(sessionStorage.ID_USUARIO);
+        }else {
+            compra_falha();
+        }
+    }
+
+    function compra_falha(){
+        painel_bau_loja.classList.toggle('visible_painel_bau_loja')
+        // mascara.classList.toggle('escurecer_tela')
+        
+        setTimeout(() => {
+            painel_bau_loja.style.display = 'none';
+            const novoelemento = document.createElement('div')
+            novoelemento.id = 'aviso_compra_sucesso'
+            novoelemento.classList.add('aviso_compra_sucesso')
+            novoelemento.innerHTML = `
+            <span style="display: flex; flex-direction: column;">
+            <h1>Erro ao realizar a compra!</h1>
+            <h2>Consulte seus créditos</h2> 
+            </span>
+            `
+            mascara.appendChild(novoelemento)
+            setTimeout(() => {
+                novoelemento.classList.toggle('visivel')
+                setTimeout(()=>{
+                                novoelemento.classList.toggle('visivel')
+                                setTimeout(()=>{
+                                                painel2.style.display = 'flex';
+                                                novoelemento.remove();
+                                                setTimeout(()=>{
+                                                                painel2.classList.toggle("visible_painel")
+                                                                },300)
+
+
+                                                },500)
+                                }, 1500)
+                }, 100);
+            
+        },750);
+        // fechar_painel_bau_loja();
+}
+
+    function compra_sucesso(){
+        painel_bau_loja.classList.toggle('visible_painel_bau_loja')
+        // mascara.classList.toggle('escurecer_tela')
+        
+        setTimeout(() => {
+            painel_bau_loja.style.display = 'none';
+            const novoelemento = document.createElement('div')
+            novoelemento.id = 'aviso_compra_sucesso'
+            novoelemento.classList.add('aviso_compra_sucesso')
+            novoelemento.innerHTML = `
+            <h1>Compra realizada com sucesso!</h1> 
+            `
+            mascara.appendChild(novoelemento)
+            setTimeout(() => {
+                novoelemento.classList.toggle('visivel')
+                setTimeout(()=>{
+                                novoelemento.classList.toggle('visivel')
+                                setTimeout(()=>{
+                                                painel2.style.display = 'flex';
+                                                novoelemento.remove();
+                                                setTimeout(()=>{
+                                                                painel2.classList.toggle("visible_painel")
+                                                                },300)
+
+
+                                                },500)
+                                }, 1000)
+                }, 100);
+            
+        },750);
+        // fechar_painel_bau_loja();
+}
 
 
 </script>

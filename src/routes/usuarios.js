@@ -46,4 +46,10 @@ router.post("/retirar_premio", function (req, res) {
     usuarioController.retirar_premio(req, res);
 });
 
+router.post("/consulta_inventario", function (req, res) {
+    usuarioController.consulta_inventario(req, res);
+});
+router.post("/criar_inventario", function (req, res) {
+    usuarioController.criar_inventario(req, res);
+});
 module.exports = router;

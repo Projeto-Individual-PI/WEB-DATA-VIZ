@@ -96,6 +96,19 @@ function consultar_item(idusuario){
     // console.log(instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+function consulta_inventario(id){
+    var instrucaoSql = `
+    select  count(nome) as qtd_item, nome, raridade, preco, url from itens_inventario  
+join estoque_itens on estoque_itens.iditem = itens_inventario.fkitem 
+left join url_img_itens on estoque_itens.iditem = url_img_itens.fkitem where fkinventario = ${id}
+group by  nome, raridade, preco,url;
+;
+    `;
+
+    console.log(instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 module.exports = {
     autenticar,
     cadastrar,
@@ -108,5 +121,6 @@ module.exports = {
     reduzir_bau,
     pesquisar_bau_usuario,
     enviar_bau,
-    retirar_premio
+    retirar_premio,
+    consulta_inventario
 };
