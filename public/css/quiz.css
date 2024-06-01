@@ -51,7 +51,7 @@ body {
     font-size: 20px;
 }
 .mascara{
-    background-image: linear-gradient(rgb(0,0,0,0.95), rgb(0,0,0,0), rgb(0,0,0,0.95));
+    background-image: linear-gradient(rgb(0,0,0,0.98), rgb(0,0,0,0), rgb(0,0,0,0.98));
     height: 100%;
 }
 .mascara2{
@@ -101,6 +101,12 @@ a {
     border-bottom:rgb(1, 195, 141, 0.1) solid 2px;
     border-radius: 5px;
 }
+.header_creditos{
+    text-align: center;
+    width: 200px;
+    border-bottom:rgb(1, 195, 141, 0.1) solid 2px;
+    border-radius: 5px;
+}
 .sobre{
     text-align: center;
     width: 80px;
@@ -142,14 +148,15 @@ cursor: pointer;
 }
 .conteudo {
     border-radius: 20px;
-    background-color: rgb(255, 255, 255, .05);
+    background-color: #132D46;
+    border: #01C38D solid 5px;
     color: white;
     width: 45%;
     height: 80%;
     display: flex;
     align-items: center;
     animation-name: animacao_conteudo;
-    animation-duration: 2s;
+    animation-duration: 1s;
     animation-direction: normal;
     
 }
@@ -210,4 +217,72 @@ cursor: pointer;
     align-items: center;
     text-align: center;
     font-size: 20px;
+}
+
+.quiz{
+    display: none;
+    flex-direction: column;
+    animation-name: animacao_conteudo;
+    animation-duration: 1s;
+    animation-direction: normal;
+    align-items: center;
+    
+}
+.quiz button{
+    margin-top: 30px;
+    width: 100px;
+    justify-content: center;
+    background-color: #01C38D;
+}
+.quiz button:hover{
+    cursor: pointer;
+    scale: 1.04;
+    
+}
+
+.escolhas {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    color: #01C38D;
+}
+.opc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #132D46;
+    width: 100px;
+    min-height: 40px;
+    height: auto;
+    border: #01C38D solid 5px;
+    border-radius: 5px;
+}
+.opc:hover{
+    cursor: pointer;
+    scale: 1.04;
+}
+
+.aviso_compra_sucesso{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 80px;
+    width: 450px;
+    height: 300px;
+    background-color: #132D46;
+    border-radius: 10px;
+    color: #FFFFFF;
+    border: #01c38d solid 2px;
+    opacity: 0;
+    transition: all 0.7s;
+}
+.visivel{
+    opacity: 1;
 }

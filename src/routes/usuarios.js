@@ -24,6 +24,11 @@ router.post("/reduzir_credito", function (req, res) {
     usuarioController.reduzir_credito(req, res);
 });
 
+router.post("/aumentar_credito", function (req, res) {
+    usuarioController.aumentar_credito(req, res);
+});
+
+
 router.post("/reduzir_bau", function (req, res) {
     usuarioController.reduzir_bau(req, res);
 });

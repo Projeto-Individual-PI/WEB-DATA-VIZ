@@ -6,12 +6,13 @@
     <title>Inventário</title>
    <link rel="stylesheet" href="./css/inventario.css">
    <script src="./js/sessao.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+
 </head>
 <body>
 
     <div class="container">
-
-
     <div class="box1">
 
         <div class="mascara">
@@ -42,7 +43,15 @@
                                     Loja
                                 </a>
                             </div>
-                        
+                            <div class="cadastro">
+                                <a href="./quiz.html">
+
+                                    Quiz
+                                </a>
+                            </div>
+                            <div class="header_creditos" id="header_creditos">
+                                CREDITOS: 
+                            </div>
                             </div>
                     
                 </div>
@@ -126,9 +135,36 @@
                 <div class="centro">
                     <div class="conteudo">
                         <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam culpa rem atque. Assumenda aliquid minus nihil fuga, voluptatibus, nam veniam quam vitae temporibus necessitatibus esse! Natus exercitationem blanditiis quas aliquam.
+                        Veja algumas métricas sobre o seu perfil.
                         </p>
+
                     </div>
+                        <div class="dashboard_donut">
+                            <div>
+                                O seguinte gráfico demonstra a distribuição da raridade dos seus itens.
+                            </div>
+                            <div style="
+                                border-radius: 10px ;
+                                background-color: rgb(255, 255, 255, 0.7);
+                                width: 30%;">
+
+                            <canvas style="border-radius: 10px;" id="dashboard_1"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="dashboard_barra">
+                        <span>
+                            O seguinte gráfico demonstra o ranking das TOP 5 pessoas com mais itens <span class="lendario">lendários</span>!
+                        </span>
+                            <div style="
+                            border-radius: 10px ;
+                            background-color: rgb(255, 255, 255, 0.7);
+                            width: 45%;">
+                                <canvas id="dashboard_2"></canvas>
+                            </div>
+                        </div>
+
+
                 
                 </div>
         
@@ -140,6 +176,7 @@
 </body>
 </html>
 <script src="./js/loja.js"></script>
+<script src="./js/dashboard.js"></script>
 <script src="./js/inventario.js"></script>
 <script>
 
@@ -160,7 +197,10 @@ window.onload =  () => {
         bau2.classList.toggle("visible_bau")
         bau3.classList.toggle("visible_bau")
 
-        exibir_creditos(sessionStorage.inventario_creditos);
+        // exibir_creditos(sessionStorage.inventario_creditos);
+        
+        plotar_grafico();
+      
 
     },200);
 
@@ -242,84 +282,7 @@ window.onload =  () => {
 
     }
     // window.onload = Autenticar_Usuario(sessionStorage.ID_USUARIO, sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO);
-    function detalhamento(jogo) {
-        
-        if(jogo.id == 'lol') {
-            
-                lol_painel.style.display = 'flex'
-                                        lol.style.display = 'none'
-                                        bo2.style.display = 'none'
-                                        ark.style.display = 'none'
-                                        setTimeout(function(){
-                    lol_painel.style.opacity = "1";
-                                        
-                                    }, 250);
-                box2.style.backgroundImage = "url('https://s1.picswalls.com/wallpapers/2015/11/21/beautiful-league-of-legends-wallpaper_111229615_289.jpg')"
-                                
-            
-            
-        }else if (jogo.id == 'bo2') {
-            bo2_painel.style.display = 'flex'
-            lol.style.display = 'none'
-            bo2.style.display = 'none'
-            ark.style.display = 'none'
-            setTimeout(function(){
-                                    bo2_painel.style.opacity = "1";
-                                        
-                                  }, 250);
-                                  
-            box2.style.backgroundImage = "url('../assets/bo2.jpg')"
-            
-        }else {
-            ark_painel.style.display = 'flex'
-            lol.style.display = 'none'
-            bo2.style.display = 'none'
-            ark.style.display = 'none'
-            setTimeout(function(){
-                                    ark_painel.style.opacity = "1";
-                                        
-                                 }, 250);
-            box2.style.backgroundImage = "url('https://www.gamewallpapers.com/wallpapers_slechte_compressie/wallpaper_ark_survival_evolved_02_1920x1080.jpg')"
 
-            
-        }
-    }
-    function fechar(nome) {
-        if (nome.id == 'bo2_fechar') {
-            bo2_painel.style.opacity = '0'
-            setTimeout(function() {
-                                        bo2_painel.style.display = 'none'
-                                        lol.style.display = 'flex'
-                                        bo2.style.display = 'flex'
-                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
-                                    }, 250);
-            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
-
-        } else if (nome.id == 'lol_fechar') {
-            
-            lol_painel.style.opacity = "0"; // Configura a opacidade para 0 para iniciar a transição
-            setTimeout(function() {
-                                        lol_painel.style.display = 'none'
-                                        lol.style.display = 'flex'
-                                        bo2.style.display = 'flex'
-                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
-                                    }, 250); // Espera 500 milissegundos (0.5 segundos) para garantir que a transição seja concluída
-            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
-                            
-            
-        } else {
-            ark_painel.style.opacity = '0'
-            setTimeout(function() {
-                                        ark_painel.style.display = 'none'
-                                        lol.style.display = 'flex'
-                                        bo2.style.display = 'flex'
-                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
-                                    }, 250);
-            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
-
-        }
-    
-    }
 
     var controlador = 0
     var estado_bau = 'fechado'

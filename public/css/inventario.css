@@ -24,6 +24,9 @@
         color: violet;
     }
 }
+
+
+
 @keyframes animacao_epico {
     from {
         color: lightblue;
@@ -34,12 +37,25 @@
     }
     
 }
+
+
 @font-face {
     font-family: 'TT Commons Regular';
     src: url('../assets/fonts/TT\ Commons\ Regular.otf') format('otf');
 }
 
 
+
+.lendario_grafico {
+    animation: animacao_lendario2 6s infinite;
+}
+
+.epico_grafico {
+    animation-name: animacao_epico2;
+    animation-duration: 2s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
 .comum {
     color: grey;
 }
@@ -164,6 +180,12 @@ a {
     border-bottom:rgb(1, 195, 141, 0.1) solid 2px;
     border-radius: 5px;
 }
+.header_creditos{
+    text-align: center;
+    width: 200px;
+    border-bottom:rgb(1, 195, 141, 0.1) solid 2px;
+    border-radius: 5px;
+}
 .sobre{
     text-align: center;
     width: 80px;
@@ -199,7 +221,9 @@ cursor: pointer;
 }
 .centro {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 100%;
     gap: 12px;
 }
@@ -544,3 +568,29 @@ margin-left: 5%;
     font-weight: bold;
 }
 
+.dashboard_barra{
+    margin-top: 40px;
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    gap: 50px;
+    display: flex;
+    align-items: center;
+    color: #01C38D;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.dashboard_donut{
+    margin-top: 40px;
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    gap: 50px;
+    display: flex;
+    align-items: center;
+    color: #01C38D;
+    flex-direction: column;
+    font-size: 20px;
+
+}

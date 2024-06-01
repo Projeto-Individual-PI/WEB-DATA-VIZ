@@ -29,7 +29,10 @@
                                     </a>
                                 </div>  
                                 <div class="sobre">
-                                    Home
+                                    <a href="./home_logada.html">
+    
+                                        Home
+                                    </a>
                                 </div>
     
                                 <div class="cadastro">
@@ -38,25 +41,44 @@
                                         Loja
                                     </a>
                                 </div>
-                            
+                                <div class="header_creditos" id="header_creditos">
+                                    CREDITOS: 
+                                </div>
                                 </div>
                         
                     </div>
         
-                    <div class="centro">
-                            <div class="conteudo" style="flex-direction: column;">
-                                <p>QUIZ 1</p>
-                                <div class="pergunta" id="pergunta">PERGUNTA</div>
-                                
-                                <div class="alternativa" id="alternativa_1">ALTERNATIVA 1</div>
+                    <div class="centro" id="centro">
+                            <div class="conteudo" style="flex-direction: column;" id="conteudo">
+                                <div class="escolha_conteudo" id="escolha_conteudo">
+                                    <p>Escolha uma categoria!</p>
 
-                                <div class="alternativa" id="alternativa_2">ALTERNATIVA 2</div>
+                                    <div class="escolhas">
+                                    <div onclick="quiz(this.id)" id="Ação"class="opc">Ação</div>
+                                    <div onclick="quiz(this.id)" id="Esportes"class="opc">Esportes</div>
+                                    <div onclick="quiz(this.id)" id="Aventura"class="opc">Aventura</div>
+                                    <div onclick="quiz(this.id)" id="Battle_royale"class="opc">Battle Royale</div>
+                                    <div onclick="quiz(this.id)" id="MOBA"class="opc">MOBA</div>
+                                    <div onclick="quiz(this.id)" id="RPG"class="opc">RPG</div>
+                                    <div onclick="quiz(this.id)" id="MMORPG"class="opc">MMORPG</div>
+                                    <div onclick="quiz(this.id)" id="FPS"class="opc">FPS</div>
+                                    <div onclick="quiz(this.id)" id="Simulação"class="opc">Simulação</div>
+                                    <div onclick="quiz(this.id)" id="Corrida"class="opc">Corrida</div>
 
 
-                                <div class="alternativa" id="alternativa_3">ALTERNATIVA 3</div>
+                                    </div>
 
-
-                                <div class="alternativa" id="alternativa_4">ALTERNATIVA 4</div>
+                                </div>
+                                <div class="quiz" id="quiz_">
+                                    <p id="quiz_p">QUIZ 1</p>
+                                    <div class="pergunta" id="pergunta">PERGUNTA</div>
+                                    
+                                    <div class="alternativa" id="alternativa_1">ALTERNATIVA 1</div>
+                                    
+                                    <div class="alternativa" id="alternativa_2">ALTERNATIVA 2</div>
+                                    
+                                    <button onclick="confirmar_resposta()">Avançar</button>
+                                </div>
 
 
                             </div>    
@@ -64,6 +86,7 @@
              </div>
     
         </div>
+        
        
             </div>
         </div>
@@ -76,13 +99,220 @@
 <script>
     window.onload = () => {
         Autenticar_Usuario(sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO, sessionStorage.ID_USUARIO);
-        Carregar_Quiz();
 
     }
 
-async function Carregar_Quiz() {
 
+function quiz(id){
+    
+            escolha_conteudo.style.display = 'none'
+            quiz_.style.display = 'flex'
+            quiz_p.innerHTML = `Quiz de ${id}`
+            Carregar_Quiz(id);
+      
+
+
+}
+
+var cnt_quiz = 0
+var genero_quiz = ''
+var id_quiz = 0
+var pontuacao_quiz = 0;
+async function Carregar_Quiz(genero) {
+    genero_quiz = genero;
+    try{
+        const response = await fetch("/quiz/carregar_quiz", {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify({
+                                            IdQuiz: genero
+                                        })
+                                    })
+
+       const data = await response.json();
+       pergunta_v = []
+       Resposta_falsa_v = []
+       Resposta_correta_v = []
+
+       data.forEach(quiz => {
+        id_quiz = quiz.idQuiz
+        pergunta_v.push(
+            {  id: quiz.idPergunta,
+               pergunta: quiz.Pergunta
+             })
+        Resposta_correta_v.push(
+            {
+            id: quiz.idPergunta,
+            resposta_correta: quiz.Resposta_correta
+        })
+        Resposta_falsa_v.push(
+            {
+            id: quiz.idPergunta,
+            resposta_falsa: quiz.Resposta_falsa
+        })
+       });
+
+       
+
+
+       pergunta.innerHTML = ` ${pergunta_v[cnt_quiz].pergunta}`
+       alternativa_1.innerHTML = `
+       <label>
+        <input type="radio" value="0" name="radio_perguntas"/>  ${Resposta_falsa_v[cnt_quiz].resposta_falsa}
+        </label>
+        `
+       alternativa_2.innerHTML = `
+       <label>
+        <input type="radio" value="1" name="radio_perguntas"/>  ${Resposta_correta_v[cnt_quiz].resposta_correta}
+        </label>
+       `
+
+
+    }catch(erro){
+
+        throw Error(erro);
+    }
+
+}
+
+function confirmar_resposta() {
+    var posso_avancar = false
+    var perguntas = document.getElementsByName('radio_perguntas')
+    for(var i = 0; i < perguntas.length; i++){
+        if (perguntas[i].checked){
+            posso_avancar = true
+            pontuacao_quiz += Number(perguntas[i].value);
+        }
+    }
+    if(posso_avancar && cnt_quiz <= perguntas.length - 1){
+        cnt_quiz ++
+        Carregar_Quiz(genero_quiz);
+    }else if(cnt_quiz > perguntas.length - 1 && posso_avancar){ 
+        Terminar_quiz()
+    }else{
+            
+            alert('Selecione alguma alternativa!')
+            
+        
+    }
+}
+
+async function Terminar_quiz(){
+    pontuacao = pontuacao_quiz * 25
+    idusuario = sessionStorage.ID_USUARIO
+    idquiz = id_quiz;
+    try{
+        const response = await fetch("/quiz/enviar_pontuacao", {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify({
+                                            PontuacaoQuiz: pontuacao,
+                                            IdUsuario: idusuario,
+                                            IdQuiz: idquiz
+                                        })
+                                    })
+
+                        if(response.ok){
+                           
+        
+                            aumentar_credito(sessionStorage.inventario_id, sessionStorage.inventario_creditos, pontuacao);
+                            quiz_sucesso(pontuacao);
+                            setTimeout(()=>{
+
+                                Autenticar_Usuario(sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO, sessionStorage.ID_USUARIO);
+
+                            },750)
+                        }else{
+                            alert('deu errado!')
+                        }
+    }catch(erro){
+
+        throw Error(erro);
+    }
+    cnt_quiz = 0
+    genero_quiz = ''
+    pontuacao_quiz = 0;
+    
+
+}
+
+
+function quiz_sucesso(pontuacao){
+    conteudo.style.display = 'none'
+       
+            const novoelemento = document.createElement('div')
+            novoelemento.id = 'aviso_quiz_sucesso'
+            novoelemento.classList.add('aviso_compra_sucesso')
+            novoelemento.innerHTML = `
+            <h1>Parabéns, você tirou uma pontuação de ${pontuacao_quiz}/3!</h1> <br>
+            <h2>e ganhou <span style="color: #01C38D">${pontuacao} créditos</span> por isso!</h2>
+            `
+            centro.appendChild(novoelemento)
+            setTimeout(() => {
+                novoelemento.classList.toggle('visivel')
+                setTimeout(()=>{
+                                novoelemento.classList.toggle('visivel')
+                                setTimeout(()=>{
+                                                escolha_conteudo.style.display = 'block';
+                                                novoelemento.remove();
+                                                setTimeout(()=>{
+                                                                quiz_.style.display = 'none'
+                                                                conteudo.style.display = 'block'
+                                                                },300)
+
+
+                                                },500)
+                                }, 1500)
+                }, 100);
+            
+       
+        // fechar_painel_bau_loja();
+}
+
+
+async function aumentar_credito(inventario_id, creditos_atuais, pontuacao){
+        var creditos_novos = Number(creditos_atuais) + Number(pontuacao);
+
+    await fetch("/usuarios/aumentar_credito", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                IdInventario: inventario_id,
+                Creditos_atuais: creditos_novos
+
+            })
+        }).then(function (resposta) {
+            // console.log("Irei reduzir os creditos!")
+            if (resposta.ok) {
+                // console.log('minha resposta sem json é :' + resposta);
+                // console.log('minha resposta com json é:' + json);
+                // console.log(inventario);
+                resposta.json().then(credito => {
+                    // console.log(credito);
+                    Carregar_Inventario(sessionStorage.ID_USUARIO);  
+                  
+                });
+
+            } else {
+                console.log("Houve um erro ao tentar atualizar os creditos!");
+                // resposta.text().then(texto => {
+                //     console.error(texto);
+                //     finalizarAguardar(texto);
+                // });
+            }
+
+        }).catch(function (erro) {
+            console.log('erro');
+        })
+    
     
 }
+
 
 </script>

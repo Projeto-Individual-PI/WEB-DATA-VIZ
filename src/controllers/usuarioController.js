@@ -72,6 +72,22 @@ function reduzir_credito(req, res){
     )
 }
 
+function aumentar_credito(req, res){
+    var fk_usuario = req.body.IdInventario;
+    var creditos_atuais = req.body.Creditos_atuais;
+    if (fk_usuario != undefined && creditos_atuais != undefined){
+        // console.log('a fk do inventario existe e os creditos também!')
+    }else {
+        console.log('o id nao existe ou os creditos nao existem :(')
+    }
+    usuarioModel.aumentar_credito(fk_usuario, creditos_atuais).then(
+    function (teste) {
+        res.json(teste);
+        // console.log(teste);
+    }        
+    )
+}
+
 function reduzir_bau(req, res){
     var fk_usuario = req.body.IdInventario;
     var baus_atuais = req.body.Baus_atuais;
@@ -129,7 +145,7 @@ async function cadastrar(req, res) {
 
         usuarioModel.autenticar(email, senha)
         .then(
-            function (resultadoAutenticar) {
+            function (resultadoAutenticar) {    
                 // console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
                 // console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
@@ -290,6 +306,7 @@ module.exports = {
     cadastrar,
     inventario,
     reduzir_credito,
+    aumentar_credito,
     enviar_item,
     consultar_bau,
     reduzir_bau,

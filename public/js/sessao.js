@@ -30,6 +30,7 @@ function Autenticar_Usuario(usuario, email, id){
             else {
                 console.log('ESTOU AUTENTICADO');
                 Carregar_Inventario(id);
+                atualiza_creditos(sessionStorage.inventario_creditos)
             }
 
 }
@@ -79,9 +80,11 @@ async  function Carregar_Inventario(id_usuario){
                                 })
                             })
 
-                            if (req.ok){
+                            setTimeout(() => {
                                 document.location.reload();
-                            }
+
+                            }, 1000)
+                            
                         }catch(error){
                             throw new Error(error)
                         }
@@ -121,7 +124,7 @@ async  function Carregar_Inventario(id_usuario){
                     ]
                     // console.log(baus);
                     inventario[0].fkbau == null ? sessionStorage.setItem('Usuario_baus', JSON.stringify(baus_vazios)) : sessionStorage.setItem('Usuario_baus', JSON.stringify(baus));
-                    exibir_creditos(sessionStorage.inventario_creditos);
+                    // exibir_creditos(sessionStorage.inventario_creditos);
                 }
 
                 });
@@ -140,4 +143,8 @@ async  function Carregar_Inventario(id_usuario){
 
         
  
+    }
+
+    function atualiza_creditos(creditos){
+        header_creditos.innerHTML = `Créditos: ${creditos}`
     }

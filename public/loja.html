@@ -37,7 +37,15 @@
                             Loja
                         </a>
                     </div>
-                
+                    <div class="cadastro">
+                        <a href="./quiz.html">
+
+                            Quiz
+                        </a>
+                    </div>
+                    <div class="header_creditos" id="header_creditos">
+                        CREDITOS: 
+                    </div>
                     </div>
                 </div>
 
@@ -185,6 +193,8 @@ async function realizar_compra(bau_preco, bau_id, quantidade, saldo_apos) {
 
             compra_sucesso();
             Carregar_Inventario(sessionStorage.ID_USUARIO);
+            Autenticar_Usuario(sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO, sessionStorage.ID_USUARIO);
+            
         }else {
             compra_falha();
         }

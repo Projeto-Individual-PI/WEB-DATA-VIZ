@@ -228,6 +228,13 @@ a {
     cursor: pointer;
 
 }
+
+.header_creditos{
+    text-align: center;
+    width: 200px;
+    border-bottom:rgb(1, 195, 141, 0.1) solid 2px;
+    border-radius: 5px;
+}
 .sobre:hover {
 transition: 0.1s;
 transform: scale(1.08);

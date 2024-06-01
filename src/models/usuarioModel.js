@@ -54,6 +54,14 @@ function reduzir_credito(fk_usuario, creditos_atuais) {
     // console.log('Executando a instrução SQL: \n' + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function aumentar_credito(fk_usuario, creditos_atuais) {
+    // console.log(`Irei reduzir os creditos do usuario de id: ${fk_usuario} para ${creditos_atuais}`);
+    var instrucaoSql = `
+        update inventario set creditos = ${creditos_atuais} where fkusuario = ${fk_usuario}
+    `;
+    // console.log('Executando a instrução SQL: \n' + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 function reduzir_bau(fk_usuario, baus_atuais, fkbau) {
     // console.log(`Irei remover o bau de id ${baus_atuais} e de fkbau ${fkbau} do usuario de id: ${fk_usuario}`);
     var instrucaoSql = `
@@ -114,6 +122,7 @@ module.exports = {
     cadastrar,
     inventario,
     reduzir_credito,
+    aumentar_credito,
     enviar_item,
     criar_inventario,
     consultar_bau,
