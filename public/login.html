@@ -43,7 +43,9 @@
                 
                     </div>
                 </div>
+                <div id="AVISO">
 
+                </div>
                 <div class="painel">
                     <div class="card_erro" id="cardErro">
                         <span id="mensagem_erro"></span>
@@ -57,54 +59,35 @@
                             <input type="text" id="email_input">
                         </label>
                         <label>Senha<br>
-                            <input type="text"  id="senha_input">
+                            <input type="password"  id="senha_input">
                         </label>
                         <div class="button">
                             <button onclick="entrar()">Entrar</button>
+                            <img src="./assets/aguarde-orange.gif" alt="" id="img_loading">
                         </div>
-                        <div id="div_aguardar" class="loading-div" style="display: none;">
-                            <img src="../assets/circle-loading.gif" id="loading-gif" />
-                          </div>
                         <div>
                             Ainda não possui Login? <a href="./cadastro/cadastro.html">Cadastre-se</a>
                         </div>
-                            
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="footer">
-
         </div>
-
-
-
     </div>
 </body>
 </html>
 <script>
-    
-
     async function entrar() {
-        aguardar();
-
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
-            return false;
         }
         else {
-            setInterval(sumirMensagem, 5000)
         }
-
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
-
         await fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
@@ -115,22 +98,18 @@
                 senhaServer: senhaVar
             })
         }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-            
-
             if (resposta.ok) {
                 console.log(resposta);
 
                 resposta.json().then(json => {
-
-                    console.log(json);
-                    console.log(JSON.stringify(json));
                     sessionStorage.ID_USUARIO = json.id;
                     sessionStorage.NOME_USUARIO = json.usuario;
                     sessionStorage.EMAIL_USUARIO = json.email;
-
+                    img_loading.style.display = 'block'
                     setTimeout(function () {
-                        window.location = "./home_logada.html";
+                        img_loading.style.display = 'none'
+                        aviso('sucesso')
+                        // window.location = "./home_logada.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -138,10 +117,8 @@
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
-
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
                 });
             }
 
@@ -149,11 +126,5 @@
             console.log(erro);
         })
 
-        return false;
     }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
-
 </script>

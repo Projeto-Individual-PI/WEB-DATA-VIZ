@@ -66,8 +66,8 @@ myChart.update();
 
 
 
-console.log(myChart_2.config.data.datasets)
-console.log(myChart_2.config.data.labels)
+// console.log(myChart_2.config.data.datasets)
+// console.log(myChart_2.config.data.labels)
 
 array_labels_barra = [];
 array_data_barra = [];    

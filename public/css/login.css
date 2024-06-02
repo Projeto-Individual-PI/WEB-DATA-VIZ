@@ -151,6 +151,12 @@ cursor: pointer;
     height: 30%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.button img {
+    display: none;
+    width: 75px;
 }
 .painel button {
     width: 75px;
