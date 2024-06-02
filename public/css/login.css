@@ -182,3 +182,26 @@ cursor: pointer;
   #div_erros_login {
     display: none
   }
+.aviso_painel{
+    min-width: 500px;
+    flex-wrap: wrap;
+    width: auto;
+    height: auto;
+    min-height: 100px;
+    background-color: #132D46;
+    border: #01C38D solid 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: all 1.5s;
+}
+.aviso_painel p{
+    margin-left: 10px;
+    margin-right: 10px;
+
+}

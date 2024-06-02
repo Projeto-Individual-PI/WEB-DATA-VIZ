@@ -9,9 +9,14 @@ function buscarUltimasMedidas(req, res) {
 
     medidaModel.buscarUltimasMedidas(limite_linhas).then((resultado) => {
         if (resultado.length > 0) {
+
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("Nenhum resultado encontrado!")
+            const vazio = [{
+                Nome: 'Sem Usuários.',
+                Qtd_itens: 0
+            }]
+            res.status(200).json(vazio)
         }
     }).catch(function (erro) {
         console.log(erro);
@@ -28,7 +33,28 @@ function buscarUltimasMedidasUsuario(req, res) {
             
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("Nenhum resultado encontrado!")
+             const vazio = [{
+                raridade: 'comum',
+                Qtd_itens: 0
+            },
+            {
+                raridade: 'incomum',
+                Qtd_itens: 0
+            },
+            {
+                raridade: 'raro',
+                Qtd_itens: 0
+            },
+            {
+                raridade: 'épico',
+                Qtd_itens: 0
+            },
+            {
+                raridade: 'lendário',
+                Qtd_itens: 0
+            }
+        ]
+            res.status(200).json(vazio)
         }
     }).catch(function (erro) {
         console.log(erro);

@@ -9,7 +9,11 @@ function Autenticar_Usuario(usuario, email, id){
             else {
                 console.log('ESTOU AUTENTICADO');
                 Carregar_Inventario(id);
-                atualiza_creditos(sessionStorage.inventario_creditos)
+
+                setTimeout(() => {
+                    atualiza_creditos(sessionStorage.inventario_creditos)
+                
+                }, 250)
             }
 
 }
@@ -114,7 +118,13 @@ async  function Carregar_Inventario(id_usuario){
 
     function aviso(mensagem) {
         if(mensagem == 'sucesso'){
-            AVISO.innerHTML = 'AAAAAAAAAAAAAAAAAA'
+
+            novoelemento = document.createElement('div')
+            novoelemento.innerHTML = '<p> LOGIN REALIZADO COM SUCESSO!</p> <p> REDIRECIONANDO PARA A PÁGINA PRINCIPAL.</p>'
+            novoelemento.id = 'aviso'
+            novoelemento.classList.add('aviso_painel')
+            AVISO.appendChild(novoelemento);
+            
         }else if(mensagem == 'erro'){
             AVISO.innerHTML = 'BBBBBBBBBBBBBBBBBBBBB'
         }

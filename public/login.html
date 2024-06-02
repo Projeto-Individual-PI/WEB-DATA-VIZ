@@ -109,8 +109,10 @@
                     setTimeout(function () {
                         img_loading.style.display = 'none'
                         aviso('sucesso')
-                        // window.location = "./home_logada.html";
-                    }, 1000); // apenas para exibir o loading
+                        setTimeout(() => {
+                            window.location = "./home_logada.html";
+                        } ,1000)
+                    }, 500); // apenas para exibir o loading
 
                 });
 

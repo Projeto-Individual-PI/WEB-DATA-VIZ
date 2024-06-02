@@ -2,12 +2,13 @@
 async function obterdadosgrafico_barra(){
 
     try{
+
     const response = await fetch(`/medidas/ultimas/`, { cache: 'no-store' })
 
     const data = await response.json()
-    // console.log(data)
+  
     return data
-    
+
     }catch(erro){
         throw new Error(erro)
     }
@@ -17,12 +18,10 @@ async function obterdadosgrafico_barra(){
 async function obterdadosgrafico_donut(id){
 
     try{
+      
     const response = await fetch(`/medidas/ultimas_usuario/${id}`, { cache: 'no-store' })
 
     const data = await response.json()
-
-
-
 
     return data
     
@@ -35,6 +34,7 @@ async function obterdadosgrafico_donut(id){
 async function atualizar_grafico(myChart, myChart_2){
     const data_grafico_donut = await obterdadosgrafico_donut(sessionStorage.ID_USUARIO)
     const data_grafico_barra = await obterdadosgrafico_barra()
+
 
     data_grafico_donut.forEach(item => {
         if(item.Raridade == 'comum'){
@@ -85,9 +85,9 @@ myChart_2.update();
 async function plotar_grafico() {
     
 
-   const data_grafico_barra = await obterdadosgrafico_barra()
+   const data_grafico_barra = await obterdadosgrafico_barra();
+   
    const data_grafico_donut = await obterdadosgrafico_donut(sessionStorage.ID_USUARIO)
-
 
     const dash1 = document.getElementById('dashboard_1')
     const dash2 = document.getElementById('dashboard_2')
