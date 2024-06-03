@@ -100,7 +100,6 @@
         }).then(function (resposta) {
             if (resposta.ok) {
                 console.log(resposta);
-
                 resposta.json().then(json => {
                     sessionStorage.ID_USUARIO = json.id;
                     sessionStorage.NOME_USUARIO = json.usuario;
