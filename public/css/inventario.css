@@ -224,16 +224,19 @@ cursor: pointer;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    min-height: 100vh;
+    height: auto;
     gap: 12px;
 }
+
 .conteudo {
     border-radius: 20px;
     background-color: rgb(255, 255, 255, .25);
     color: white;
-    width: 75%;
+    width: 85%;
     height: 85%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -593,4 +596,11 @@ margin-left: 5%;
     flex-direction: column;
     font-size: 20px;
 
+}
+.painel_graficos {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 200px;
+    height: auto;
 }

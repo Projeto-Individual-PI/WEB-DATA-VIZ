@@ -218,52 +218,80 @@ cursor: pointer;
     display: flex;
     flex-direction: row;
 }
-.bo2 {
-    opacity: 0;
+
+.painel_jogo {
+    
     transition: opacity 0.25s ease;
-    border-radius: 20px;
-    background-color: rgb(255, 255, 255, .50);
-    color: white;
-    width: 45%;
-    height: 80%;
+    border-radius: 10px;
+    background-color: #132D46;
+    border: #01C38D solid 5px;
+    color: #01C38D;
+    width: 65%;
+    min-height: 500px;
+    height: auto;
     display: none;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+
 }
-.lol {
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    border-radius: 20px;
-    background-color: rgb(255, 255, 255, .50);
-    color: white;
-    width: 45%;
-    height: 80%;
-    display: none;
-    align-items: center;
-    justify-content: center;
+
+.imagem {
+    width: 450px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    text-align: start;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
-.ark {
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    border-radius: 20px;
-    background-color: rgb(255, 255, 255, .50);
-    color: white;
-    width: 45%;
-    height: 80%;
-    display: none;
-    align-items: center;
-    justify-content: center;
+.img_bo2{
+    background-image: url('../assets/imgs/bo2logo.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+
+}
+.img_lol{
+    background-image: url('../assets/imgs/lollogo.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+     
+}
+.img_ark{
+    background-image: url('../assets/imgs/arklogo.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
 }
  .botao {
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: start;
     align-items: start;
-}
+    background-color: #132D46;
+    border: transparent;
+    font-size: 25px;
+    color: #01C38D;
+    background-color: transparent;
+    width: 100%;
+    height: 30px;
 
-.botao button {
-    background-color: rgb(255, 255, 255, .15);
+}
+.texto{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    text-align: start;
+    margin-top: 20px;
+    margin-left: 20px;
     color: white;
 }
 .box2 button:hover{

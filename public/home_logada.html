@@ -49,6 +49,7 @@
                 </div>
     
                 <div class="centro">
+                    
                         <div class="conteudo" style="flex-direction: column;">
                             <p>
                             A indústria dos jogos no Brasil está em uma <span style="color: aqua;">constante crescente</span> atualmente
@@ -63,6 +64,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam culpa rem atque. Assumenda aliquid minus nihil fuga, voluptatibus, nam veniam quam vitae temporibus necessitatibus esse! Natus exercitationem blanditiis quas aliquam.
                             </p>
                         </div>  
+
                     
                 </div>
          </div>
@@ -77,34 +79,60 @@
                 <p>Clique em uma das imagens para ver um pouco sobre os jogos que mais marcaram a minha vida.</p>
 
                 
-                <div class="bo2" id="bo2_painel">
-                    <div class="botao">
-
-                    <button onclick="fechar(this)" id="bo2_fechar">
-                        X
-                    </button>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni totam provident rerum quia modi? Odio veritatis velit qui doloribus sunt quis, ea sed culpa ipsum iste illo ullam voluptatibus officiis?</p>
+                <div class="painel_jogo" id="bo2_painel">
                     
-                </div>
-                <div class="lol" id="lol_painel">
-                    <div class="botao">
-
-                    <button onclick="fechar(this)" id="lol_fechar">
+                    <button class="botao" onclick="fechar(this)" id="bo2_fechar">
                         X
                     </button>
+                    <div style="
+                    display: flex;
+                    flex-direction: row;
+                    ">
+                    <div class="texto">
+                        
+                            Call of Duty: Black OPs II é um clássico fps (first person shooter) lançado em 2012 para as plataformas
+                            Xbox 360, Playstation 3 e Windows. Ele possui diversos modos de jogo como Campanha, Multiplayer,
+                            e Zombies.
+
+
+
+                        </div>     
+                        <div class="imagem" id="imagem_jogo_bo2">
+
+                        </div>
+                        </div>
+
+                </div>             
+                <div class="painel_jogo" id="lol_painel">
+                    <button class="botao" onclick="fechar(this)" id="lol_fechar">
+                        X
+                    </button>
+                    <div style="
+                    display: flex;
+                    flex-direction: row;
+                    "> 
+                    <div class="texto">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis provident, eaque, suscipit atque ex praesentium asperiores dolor harum fugit veniam distinctio eum inventore sint quas est odio nobis voluptatibus dignissimos.</p>
-                    </div>                    
+                    </div>             
+                    <div class="imagem" id="imagem_jogo_lol">
+                    </div>   
+                </div>    
                 </div>
-                <div class="ark" id="ark_painel">
-                    <div class="botao">
-                        <button onclick="fechar(this)" id="ark_fechar">
+                <div class="painel_jogo" id="ark_painel">
+                    <button class="botao" onclick="fechar(this)" id="ark_fechar">
                             X
                         </button>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis omnis mollitia quisquam exercitationem recusandae, quis, veniam eligendi inventore neque quaerat amet, esse quae nesciunt ad quos! Aliquam magnam ducimus voluptatum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate at necessitatibus id natus deleniti cumque laborum, fugiat numquam alias error iste ab facilis ipsum optio, cum consequatur officia molestias culpa?</p>
+                    <div style="
+                    display: flex;
+                    flex-direction: row;
+                    ">  
+                        <div class="texto">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis provident, eaque, suscipit atque ex praesentium asperiores dolor harum fugit veniam distinctio eum inventore sint quas est odio nobis voluptatibus dignissimos.</p>
+                            </div>      
+                            <div class="imagem" id="imagem_jogo_ark">
 
-                    </div>
-
+                            </div>
+                            </div>
                     
                 </div>
                 <div class="alinha_imagem">
@@ -143,87 +171,8 @@
 </body>
 </html>
 <script src="./js/loja.js"></script>
+<script src="./js/home.js"></script>
 <script>
     window.onload = Autenticar_Usuario(sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO, sessionStorage.ID_USUARIO);
-    function detalhamento(jogo) {
-        
-        if(jogo.id == 'lol') {
-            
-                lol_painel.style.display = 'flex'
-                                        lol.style.display = 'none'
-                                        bo2.style.display = 'none'
-                                        ark.style.display = 'none'
-                                        setTimeout(function(){
-                    lol_painel.style.opacity = "1";
-                                        
-                                    }, 250);
-                box2.style.backgroundImage = "url('https://s1.picswalls.com/wallpapers/2015/11/21/beautiful-league-of-legends-wallpaper_111229615_289.jpg')"
-                                
-            
-            
-        }else if (jogo.id == 'bo2') {
-            bo2_painel.style.display = 'flex'
-            lol.style.display = 'none'
-            bo2.style.display = 'none'
-            ark.style.display = 'none'
-            setTimeout(function(){
-                                    bo2_painel.style.opacity = "1";
-                                        
-                                  }, 250);
-                                  
-            box2.style.backgroundImage = "url('../assets/bo2.jpg')"
-            
-        }else {
-            ark_painel.style.display = 'flex'
-            lol.style.display = 'none'
-            bo2.style.display = 'none'
-            ark.style.display = 'none'
-            setTimeout(function(){
-                                    ark_painel.style.opacity = "1";
-                                        
-                                 }, 250);
-            box2.style.backgroundImage = "url('https://www.gamewallpapers.com/wallpapers_slechte_compressie/wallpaper_ark_survival_evolved_02_1920x1080.jpg')"
-
-            
-        }
-    }
-    function fechar(nome) {
-        if (nome.id == 'bo2_fechar') {
-            bo2_painel.style.opacity = '0'
-            setTimeout(function() {
-                                        bo2_painel.style.display = 'none'
-                                        lol.style.display = 'flex'
-                                        bo2.style.display = 'flex'
-                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
-                                    }, 250);
-            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
-
-        } else if (nome.id == 'lol_fechar') {
-            
-            lol_painel.style.opacity = "0"; // Configura a opacidade para 0 para iniciar a transição
-            setTimeout(function() {
-                                        lol_painel.style.display = 'none'
-                                        lol.style.display = 'flex'
-                                        bo2.style.display = 'flex'
-                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
-                                    }, 250); // Espera 500 milissegundos (0.5 segundos) para garantir que a transição seja concluída
-            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
-                            
-            
-        } else {
-            ark_painel.style.opacity = '0'
-            setTimeout(function() {
-                                        ark_painel.style.display = 'none'
-                                        lol.style.display = 'flex'
-                                        bo2.style.display = 'flex'
-                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
-                                    }, 250);
-            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
-
-        }
-    
-
-      
-
-    }
+   
 </script>
