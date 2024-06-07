@@ -26,3 +26,30 @@ async function consulta_inventario(id){
 
 
 }
+
+async function reduzir_item(item, usuario){
+
+    // console.log(item)
+    // console.log(usuario)
+
+    try{
+
+        const response = await fetch("usuarios/reduzir_item", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idusuarioserver: usuario,
+                itemserver: item
+            })
+        })
+
+
+        console.log(response)
+
+    }catch(error){
+        throw new Error(error);
+    }
+
+}

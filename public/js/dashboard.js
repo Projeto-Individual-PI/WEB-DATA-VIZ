@@ -82,7 +82,7 @@ myChart_2.update();
 
 }
 
-async function plotar_grafico() {
+async function plotar_grafico_inventario() {
     
 
    const data_grafico_barra = await obterdadosgrafico_barra();
@@ -91,6 +91,7 @@ async function plotar_grafico() {
 
     const dash1 = document.getElementById('dashboard_1')
     const dash2 = document.getElementById('dashboard_2')
+
 
 
     
@@ -180,7 +181,15 @@ for (var i = 0; i < 5; i++){
         options: {
           plugins: {
             customCanvasBackgroundColor: {
-              color: 'transparent',
+              color: 'transparent'
+            },
+            legend: {
+              labels:{
+                color: 'white', 
+                font: {
+                  size: 20
+                }
+              }
             }
           }
         },
@@ -248,23 +257,58 @@ for (var i = 0; i < 5; i++){
           datasets: [{
             label: 'Quantidade de itens lendários.',
             data: array_data_barra,
-            borderWidth: 2,
-            backgroundColor: '#01c38d'
-          }]
+            borderWidth: 3,
+            backgroundColor: '#01c38d',
+            borderColor: '#132D46'
+        }]
         },
-        options: {
+        options: {   
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: true,
+              grid: {
+                  color: 'white'
+              },
+              ticks: {
+                color: 'white'
+              }
+            },
+            x: {
+              beginAtZero: true,
+              grid: {
+                color: 'white'
+              },
+              ticks: {
+                color: 'white'
+              }
             }
-          },
-          indexAxis: 'y'
           
-          
-        }
+        },
+          indexAxis: 'y',
+          plugins: {
+            customCanvasBackgroundColor: {
+              color: 'transparent'
+            },
+            legend: {
+              labels:{
+                color: 'white', 
+                font: {
+                  size: 20
+                }
+              }
+            }
+          }
+        },
+        plugins: [plugin],
       });
+
+
+
+    
 
       setInterval(() => {
         atualizar_grafico(myChart, myChart_2);
       }, 3000);
 }
+
+

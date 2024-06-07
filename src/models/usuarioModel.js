@@ -92,7 +92,7 @@ function consultar_bau(idbau) {
 }
 function retirar_premio(raridade){
     var instrucaoSql = `
-    select * from estoque_itens where raridade = '${raridade}'
+    select iditem, nome, raridade, preco, url from estoque_itens join url_img_itens on iditem = fkitem where raridade = '${raridade}'
     `;
     console.log(instrucaoSql)
     return database.executar(instrucaoSql);
@@ -113,9 +113,28 @@ left join url_img_itens on estoque_itens.iditem = url_img_itens.fkitem where fki
 group by  nome, raridade, preco,url;
 ;
     `;
-
     console.log(instrucaoSql);
     return database.executar(instrucaoSql);
+}
+
+function consulta_item(idusuario, item){
+    var instrucaoSql = `
+    
+    select itens_inventario.iditem, nome, raridade, preco from itens_inventario join estoque_itens on itens_inventario.fkitem = estoque_itens.iditem where fkinventario = ${idusuario} and 
+    nome = '${item}' order by itens_inventario.iditem limit 1;
+    `
+    console.log(instrucaoSql)
+    return database.executar(instrucaoSql)   
+}
+
+function reduzir_item(idusuario, item){
+    var instrucaoslq = `
+    delete from itens_inventario where fkinventario = ${idusuario} and iditem = ${item}
+    
+    `
+    // console.log(instrucaoslq)
+
+    return database.executar(instrucaoslq)
 }
 module.exports = {
     autenticar,
@@ -131,5 +150,7 @@ module.exports = {
     pesquisar_bau_usuario,
     enviar_bau,
     retirar_premio,
-    consulta_inventario
+    consulta_inventario,
+    consulta_item,
+    reduzir_item
 };

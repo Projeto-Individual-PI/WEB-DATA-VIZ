@@ -118,10 +118,9 @@
         <div class="centro">
             <div class="conteudo">
 
-                <div class="inventory-container">
+                <div class="inventory-container" id="inventory_container">
                     <h1>Inventário de Itens</h1>
-                    <div id="aviso"></div>
-                    <input type="text" id="searchBar" onkeyup="pesquisar()" placeholder="Pesquisar itens...">
+                    <div id="aviso_msg"></div>
                     <div class="inventory-grid" id="inventoryGrid">
 
                     </div>
@@ -133,33 +132,38 @@
     <div class="box3">
             <div class="mascara2">
                 <div class="centro">
-                    <div class="conteudo">
-                        <p>
+                    <div class="conteudo" style="width: 100%;">
+                        <h1>
                         Veja algumas métricas sobre o seu perfil.
-                        </p>    
+                        </h1>    
+                        <h2>
+                            Distribuição da raridade dos seus itens.
+                        </h2>
+                        
                         <div>
-                            O seguinte gráfico demonstra a distribuição da raridade dos seus itens.
                 <div class="painel_graficos">
-                        <div class="dashboard_donut">
-                            </div>
                             <div style="
                                 border-radius: 10px ;
-                                background-color: rgb(255, 255, 255, 0.7);
-                                width: 30%;">
+                                width: 45%;
+                                color: aliceblue;">
 
                             <canvas style="border-radius: 10px;" id="dashboard_1"></canvas>
-                            </div>
+                        </div>
+                     
+                            
+                            
                         </div>
 
                         <div class="dashboard_barra">
-                        <span>
-                            O seguinte gráfico demonstra o ranking das TOP 5 pessoas com mais itens <span class="lendario">lendários</span>!
-                        </span>
+                            <h2 style="color: white;">
+                            <span>
+                                Ranking das TOP 5 pessoas com mais itens <span class="lendario">lendários<span>!
+                            </span>
+                        </h2>
                             <div style="
                             border-radius: 10px ;
-                            background-color: rgb(255, 255, 255, 0.7);
-                            width: 45%;">
-                                <canvas id="dashboard_2"></canvas>
+                            width: 100%;">
+                                <canvas style="border-radius: 10px;" id="dashboard_2"></canvas>
                             </div>
                         </div>
                 </div>
@@ -178,6 +182,7 @@
 <script src="./js/loja.js"></script>
 <script src="./js/dashboard.js"></script>
 <script src="./js/inventario.js"></script>
+<script src="./js/quiz.js"></script>
 <script>
 
 
@@ -199,7 +204,7 @@ window.onload =  () => {
 
         // exibir_creditos(sessionStorage.inventario_creditos);
         
-        plotar_grafico();
+        plotar_grafico_inventario();
       
 
     },200);
@@ -214,19 +219,42 @@ window.onload =  () => {
     inventoryGrid.innerHTML = '';
     
     if(lista_itens_inventario.length == 0){
-        aviso.innerHTML = `
+        aviso_msg.innerHTML = `
         <h1>Você ainda não possui itens! Assim que você abrir algum baú, seus itens aparecerão aqui.</h1>
         `
-
-
     }else{
         aviso.innerHTML = '';
         inventoryGrid.innerHTML = '';
         for (var i = 0; i < lista_itens_inventario.length; i++)
-        inventoryGrid.innerHTML += `<div class="inventory-item" data-name="${lista_itens_inventario[i].nome}" onclick="">
+        {
+            raridade_borda = ''
+        if (lista_itens_inventario[i].raridade == 'comum'){
+            var raridade = 'comum'
+        } else if (lista_itens_inventario[i].raridade == 'incomum'){
+            var raridade = 'incomum'
+        } else if (lista_itens_inventario[i].raridade == 'raro'){
+            var raridade = 'raro'
+        } else if (lista_itens_inventario[i].raridade == 'épico'){
+            var raridade = 'epico'
+            var raridade_borda = 'animacao_epico_borda'
+        } else if (lista_itens_inventario[i].raridade == 'lendário'){
+            var raridade = 'lendario'
+            var raridade_borda = 'animacao_lendario_borda'
+
+        } 
+            inventoryGrid.innerHTML += `<div class="inventory-item" style="
+            animation-name: ${raridade_borda};
+            animation-duration: 2s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        " data-name="${lista_itens_inventario[i].nome}" onclick='detalhar_item(${ JSON.stringify(lista_itens_inventario[i])})''>
+        
     <p>Item ${i + 1} - ${lista_itens_inventario[i].nome} (${lista_itens_inventario[i].qtd_item})</p>
-    <img src=${lista_itens_inventario[i].url} alt="Item 1">
+    <img style="width: 150px" src=${lista_itens_inventario[i].url} alt="Item 1">
+    <br>
+    Raridade: <span class="${raridade}">${lista_itens_inventario[i].raridade}</span>
     </div>`
+    } 
     
 }
     }
@@ -358,20 +386,6 @@ async function fechar_painel(id){
 }
 
    
-function pesquisar() {
-            const searchBar = document.getElementById('searchBar');
-            const filter = searchBar.value.toLowerCase();
-            const inventoryItems = document.getElementsByClassName('inventory-item');
-
-            for (let i = 0; i < inventoryItems.length; i++) {
-                const itemName = inventoryItems[i].getAttribute('data-name').toLowerCase();
-                if (itemName.includes(filter)) {
-                    inventoryItems[i].style.display = "";
-                } else {
-                    inventoryItems[i].style.display = "none";
-                }
-            }
-        }
 
 
     function abrir_bau(bau_escolhido) {
@@ -481,14 +495,6 @@ function pesquisar() {
         var raro_numero = [] 
         var epico_numero = [] 
         var lendario_numero = [] 
-
-        var comum_premio = ['Camiseta rasgada', 'Boné encardido', 'Tampa de Garrafa', 'Óculos sem lente']
-        var incomum_premio = ['INCOMUM A','INCOMUM B','INCOMUM C','INCOMUM D']
-        var raro_premio = ['RARO A','RARO B','RARO C','RARO D']
-        var epico_premio = ['ÉPICO A','ÉPICO B','ÉPICO C','ÉPICO D']
-        var lendario_premio = ['Lendário A','Lendário B','Lendário C','Lendário D']        
-        
-
         for (var i = 1; i <= 100; i++){
             
             if(comum_numero.length < qtd_comum){
@@ -513,6 +519,15 @@ function pesquisar() {
          if (comum_numero.indexOf(gacha) >= 0) 
         {
             premio_retirado = await retirar_premio('comum');
+            var img = `<img src=${premio_retirado.url} style="
+            width: 75px;
+            margin-left: 35%;
+            border: #01C38D solid 5px;
+            animation-name: animacao_conteudo;
+            animation-duration: 2s;
+            animation-direction: normal;
+
+            "></img>`
             var frase = `${premio_retirado.nome}`
             var retirado = comum
             comuns++
@@ -525,6 +540,15 @@ function pesquisar() {
         } else if (incomum_numero.indexOf(gacha) >= 0) 
         {
             premio_retirado = await retirar_premio('incomum');
+            var img = `<img src=${premio_retirado.url} style="
+            width: 75px;
+            margin-left: 35%;
+            border: #01C38D solid 5px;
+            animation-name: animacao_conteudo;
+            animation-duration: 2s;
+            animation-direction: normal;
+
+            "></img>`
             var frase = `${premio_retirado.nome}`
             var retirado = incomum
             incomuns++
@@ -537,6 +561,15 @@ function pesquisar() {
 
         }else if (raro_numero.indexOf(gacha) >= 0) {
             premio_retirado = await retirar_premio('raro');
+            var img = `<img src=${premio_retirado.url} style="
+            width: 75px;
+            margin-left: 35%;
+            border: #01C38D solid 5px;
+            animation-name: animacao_conteudo;
+            animation-duration: 2s;
+            animation-direction: normal;
+
+            "></img>`
             var frase = `${premio_retirado.nome}`
             var retirado = raro;
             vezes++;
@@ -547,6 +580,15 @@ function pesquisar() {
         
         }else if (epico_numero.indexOf(gacha) >= 0){
             premio_retirado = await retirar_premio('epico');
+            var img = `<img src=${premio_retirado.url} style="
+            width: 75px;
+            margin-left: 35%;
+            border: #01C38D solid 5px;
+            animation-name: animacao_conteudo;
+            animation-duration: 2s;
+            animation-direction: normal;
+
+            "></img>`
             var frase = `${premio_retirado.nome}`
             var retirado = epico
             epicos++
@@ -559,6 +601,15 @@ function pesquisar() {
 
         }else {
             premio_retirado = await retirar_premio('lendario');
+            var img = `<img src=${premio_retirado.url} style="
+            width: 75px;
+            margin-left: 35%;
+            border: #01C38D solid 5px;
+            animation-name: animacao_conteudo;
+            animation-duration: 2s;
+            animation-direction: normal;
+        
+            "></img>`
             var frase = `${premio_retirado.nome}`
             var retirado = lendario
             lendarios++
@@ -569,19 +620,23 @@ function pesquisar() {
 
         }
         // console.log(premio_retirado)
-        mensagem_tabela += `
-        <tr>
-        <td>${comuns}</td>        
-        <td> ${incomuns}</td>
-        <td>${raros}</td>
-        <td>${epicos}</td>
-        <td>${lendarios}</td>
-        </tr>
-        `
+        // mensagem_tabela += `
+        // <tr>
+        // <td>${comuns}</td>        
+        // <td> ${incomuns}</td>
+        // <td>${raros}</td>
+        // <td>${epicos}</td>
+        // <td>${lendarios}</td>
+        // </tr>
+        // `
         
-        tabela.innerHTML = mensagem_tabela;
-
-        div_premio.innerHTML = `Item Retirado: ${retirado} - ${frase}`;
+        // tabela.innerHTML = mensagem_tabela;
+        console.log(img)
+        div_premio.innerHTML = `<br><br>Item Retirado: ${retirado} - ${frase}
+        <br><br>
+        ${img}
+        
+        `;
 
         setTimeout(atualiza_bau, 1000)
         estado_bau = 'fechado'
@@ -589,9 +644,194 @@ function pesquisar() {
         
        
         
+
+
+    }
+
+    function detalhar_item(item){
+        
+        raridade_borda = ''
+        if (item.raridade == 'comum'){
+            var raridade = 'comum'
+        } else if (item.raridade == 'incomum'){
+            var raridade = 'incomum'
+        } else if (item.raridade == 'raro'){
+            var raridade = 'raro'
+        } else if (item.raridade == 'épico'){
+            var raridade = 'epico'
+            var raridade_borda = `
+            
+        animation-name: animacao_epico_borda;
+        animation-duration: 2s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+            `
+        } else if (item.raridade == 'lendário'){
+            var raridade = 'lendario'
+            var raridade_borda = `
+        animation-name: animacao_lendario_borda;
+        animation-duration: 2s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+            
+            `
+
+        } 
+
+        inventoryGrid.style.display = 'none'
+        const novoelemento = document.createElement('div')
+        novoelemento.id = 'painel_venda';
+        novoelemento.innerHTML = `
+        <div style="
+        display: flex;
+        flex-direction: column;
+        width: 65%;
+        height: 500px;
+        border: #01C38D solid 8px;
+        background-color: #191E29;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 16%;
+        margin-bottom: 10%;
+        animation-name: animacao_conteudo;
+        animation-duration: 1s;
+        animation-direction: normal;
+       ${raridade_borda}
+    
+        " 
+        > 
+
+            <button 
+            class="botao_fechar"
+            style="
+            margin-left: 90%;
+            width: 100px;
+            font-size: 45px;
+            background-color: transparent;
+            border: transparent;
+            color: #01C38D;
+            "
+            onclick="fechar_painel_loja()";
+            >X</button>
+            <h2 style="margin-bottom: 70px;">${item.nome}</h2>
+
+            <img style="width: 100px;margin-bottom: 20px"src=${item.url}></img>
+            <div>Raridade: <span id="raridade_venda">${item.raridade}</span> <br>
+            <br>
+                Quantidade: ${item.qtd_item} <br>
+            <br>
+ 
+               Preço: ${item.preco} créditos <br>
+            </div>
+
+            <button
+            class="botao_fechar"
+
+            style="
+            background-color: #01C38D;
+            width: 100px;
+            height: 35px;
+            border: transparent;
+            border-radius: 5px;
+            margin-top: 7%;
+            "
+            id="botaovenda"
+            onclick='realizar_venda(${JSON.stringify(item)})'
+            >Vender
+            </button>
+
+
+        </div>
+            `
+
+            inventory_container.appendChild(novoelemento)
+            raridade_venda.classList.add(raridade)
+        // console.log(item)
     }
    
 
       
+function fechar_painel_loja(){
+    painel_venda.remove()
+    inventoryGrid.style.display = 'Grid'
 
+
+
+}
+function realizar_venda(item){
+    document.getElementById('botaovenda').setAttribute('disabled', true)
+
+    document.getElementById('painel_venda').innerHTML = `
+    
+     <div style="
+        display: flex;
+        flex-direction: column;
+        width: 65%;
+        height: 500px;
+        border: #01C38D solid 8px;
+        background-color: #191E29;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 16%;
+        margin-bottom: 10%;
+        font-size: 40px;
+        " 
+        > 
+
+            <button 
+            class="botao_fechar"
+            style="
+            margin-left: 90%;
+            width: 100px;
+            font-size: 30px;
+            background-color: transparent;
+            border: transparent;
+            color: #01C38D;
+            "
+            onclick="fechar_painel_loja()";
+            >X</button>
+            Você tem certeza que deseja vender o item <span style="color: blue">${item.nome}
+            </span>por ${item.preco} créditos? 
+            
+
+<button
+            class="botao_fechar"
+
+            style="
+            background-color: #01C38D;
+            width: 100px;
+            height: 35px;
+            border: transparent;
+            border-radius: 5px;
+            margin-top: 7%;
+            "
+            id="botaovenda"
+            onclick='vender(${JSON.stringify(item)})''
+            >Vender
+            </button>
+        </div>
+    `
+
+  
+}
+function vender(item){
+    // console.log(item)
+    document.getElementById('botaovenda').setAttribute('enabled', true)
+    setTimeout(() => {
+          reduzir_item(item.nome, sessionStorage.inventario_id);
+          aumentar_credito(sessionStorage.inventario_id, sessionStorage.inventario_creditos, item.preco);
+          setTimeout(() => {
+            Painel_inventario(sessionStorage.ID_USUARIO);
+        Autenticar_Usuario(sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO,sessionStorage.ID_USUARIO);
+              
+          }, 100);  
+
+        }, 500)
+    fechar_painel_loja()
+
+    
+
+}
 </script>

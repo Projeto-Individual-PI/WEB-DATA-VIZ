@@ -18,7 +18,7 @@ function consulta_pontuacao(idusuario, idquiz){
 function enviar_pontuacao(pontuacao, id, idusuario, idquiz){
     var comando = `
     insert into pontuacao_usuario values 
-    (${id}, ${idusuario}, ${idquiz}, ${pontuacao})
+    (${id}, ${idusuario}, ${idquiz}, ${pontuacao}, default)
     `
 
     return database.executar(comando)

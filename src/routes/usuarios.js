@@ -57,4 +57,8 @@ router.post("/consulta_inventario", function (req, res) {
 router.post("/criar_inventario", function (req, res) {
     usuarioController.criar_inventario(req, res);
 });
+
+router.post("/reduzir_item", function(req, res){
+    usuarioController.reduzir_item(req, res);
+})
 module.exports = router;

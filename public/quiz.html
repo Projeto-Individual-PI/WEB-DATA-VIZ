@@ -90,15 +90,110 @@
        
             </div>
         </div>
-       
+        
+        <div class="box3">
+            <div class="mascara2">
+                <div class="centro">
+                    <div class="conteudo" style="
+                        background-color: transparent;
+                        margin-top: 100px; 
+                        width: 100%;
+                        justify-content: space-evenly;
+                        border: transparent;
+                        flex-direction: column;
+                        ">
+                                    
+                                    <div style="
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: space-between;
+                                    ">
+                                    <h2 style="margin-left: 15%;">Ranking de respostas ao quiz.</h2>
+                                    <h2 style="margin-right: 10%;">Histórico pessoal de respostas ao quiz.</h2>
+                                    </div>
+                                    
+                    <div style="
+                    display: flex;
+                    flex-direction: row;
+                    height: 100%;
+                    justify-content: space-evenly;">
+                    <div style="
+                        background-color: #132D46;
+                        border-radius: 10px;
+                        display: flex;
+                        width: 47%;
+                        height: 80%;
+                        border: #01C38D solid 5px;
+                        justify-content: center;
+
+                        ">
+                           
+                            <div class="tabela">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Posição</th>
+                                        <th>Nome</th>
+                                        <th>Tentativas</th>
+                                        <th>Créditos Obtidos</th>
+                                    </tr>
+                                    
+                                </thead>
+                                <tbody id="ultimas_pontuacoes"></tbody>
+                            </table>
+                            </div>
+                    </div>
+                    <div style="
+                        border-radius: 10px;
+                        background-color: #132D46;
+                        display: flex;
+                        width: 47%;
+                        height: 80%;
+                        border: #01C38D solid 5px;
+
+                        ">
+                            <div class="tabela">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Tentativa</th>
+                                        <th>Quiz</th>
+                                        <th>Pontuação</th>
+                                    </tr>
+                                   
+                                </thead>
+                                <tbody id="historico_tentativas"></tbody>
+                            </table>
+                            </div>
+                           
+                        
+
+                        
+
+                        </div>
+                        </div>
+                    </div>
+
+
+                
+                </div>
+        
+            </div>
     
     </div>
 </body>
 </html>
 <script src="./js/sessao.js"></script>
+<script src="./js/dashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
     window.onload = () => {
         Autenticar_Usuario(sessionStorage.NOME_USUARIO, sessionStorage.EMAIL_USUARIO, sessionStorage.ID_USUARIO);
+        buscar_pontuacoes();
+        buscar_pontuacoes_usuario(sessionStorage.ID_USUARIO);
+
 
     }
 
@@ -118,6 +213,7 @@ var cnt_quiz = 0
 var genero_quiz = ''
 var id_quiz = 0
 var pontuacao_quiz = 0;
+
 async function Carregar_Quiz(genero) {
     genero_quiz = genero;
     try{
@@ -236,8 +332,8 @@ async function Terminar_quiz(){
     cnt_quiz = 0
     genero_quiz = ''
     pontuacao_quiz = 0;
-    
-
+    buscar_pontuacoes();
+    buscar_pontuacoes_usuario(sessionStorage.ID_USUARIO);
 }
 
 
@@ -312,6 +408,56 @@ async function aumentar_credito(inventario_id, creditos_atuais, pontuacao){
         })
     
     
+}
+
+async function buscar_pontuacoes(){
+    try{
+        const response = await fetch(`/medidas/pontuacao-tempo-real/`, { cache: 'no-store' })
+
+        if (response.ok){
+            const dados = await response.json()
+            var cnt = 1
+            // console.log(dados)
+            ultimas_pontuacoes.innerHTML = ''
+            dados.forEach(item => {
+                ultimas_pontuacoes.innerHTML += `
+                <tr>
+                <td>${cnt}º</td>
+                <td>${item.usuario}</td>
+                <td>${item.tentativas}</td>
+                <td>${item.pontuacao}</td>
+                </tr>`
+                cnt++
+            });
+        }
+    }catch(erro){
+        throw new Error(erro)
+    }
+}
+
+async function buscar_pontuacoes_usuario(usuario){
+    try{
+        const response = await fetch(`/medidas/pontuacao-tempo-real-usuario/${usuario}`, { cache: 'no-store' })
+
+        if (response.ok){
+            const dados = await response.json()
+            dados.reverse()
+            var cnt = dados.length
+            // console.log(dados)
+            historico_tentativas.innerHTML = ''
+            dados.forEach(item => {
+                historico_tentativas.innerHTML += `
+                <tr>
+                    <td>${cnt}º</td>
+                    <td>${item.genero}</td>
+                    <td>${item.Pontuacao}</td>
+                </tr>`
+                cnt--
+            });
+        }
+    }catch(erro){
+        throw new Error(erro)
+    }
 }
 
 

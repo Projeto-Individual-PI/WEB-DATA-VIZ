@@ -301,6 +301,22 @@ function consultar_bau(req, res){
     }
 }
 
+async function reduzir_item(req, res){
+    const idusuario = req.body.idusuarioserver;
+    const item = req.body.itemserver
+
+   const ultimo_item = await usuarioModel.consulta_item(idusuario, item).then((resposta)=>{
+        return resposta
+    })    
+
+
+    // console.log(ultimo_item);
+    usuarioModel.reduzir_item(idusuario, ultimo_item[0].iditem).then((resposta) => {
+
+        res.status(200).send(resposta)
+    })
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -313,5 +329,6 @@ module.exports = {
     enviar_bau,
     retirar_premio,
     consulta_inventario,
-    criar_inventario
+    criar_inventario,
+    reduzir_item
 }

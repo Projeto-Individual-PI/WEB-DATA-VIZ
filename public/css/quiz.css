@@ -247,6 +247,7 @@ cursor: pointer;
     flex-wrap: wrap;
     gap: 50px;
     color: #01C38D;
+    
 }
 .opc{
     display: flex;
@@ -254,7 +255,8 @@ cursor: pointer;
     justify-content: center;
     text-align: center;
     margin-top: 20px;
-    background-color: #132D46;
+    color: #132D46;
+    background-color: #01C38D;
     width: 100px;
     min-height: 40px;
     height: auto;
@@ -285,4 +287,40 @@ cursor: pointer;
 }
 .visivel{
     opacity: 1;
+
+
+}
+
+
+.tabela {
+    overflow: auto;
+    width: 100%;
+}
+
+.tabela table {
+    border: 1px solid #dededf;
+    height: 100%;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 1px;
+    text-align: center;
+}
+
+.tabela  {
+    text-align: center;
+}
+
+.tabela th {
+    border: 1px solid #01C38D;
+    background-color: #01C38D;
+    color: #132D46;
+    padding: 5px;
+}
+
+.tabela td {
+    border: 1px solid #01C38D;
+    background-color: #132D46;
+    color: #01C38D;
+    padding: 5px;
 }

@@ -83,9 +83,23 @@ function buscarMedidasEmTempoReal(req, res) {
     });
 }
 
+function buscarUltimasPontuacoes(req, res){
+    medidaModel.buscarUltimasPontuacoes().then((resposta)=>{
+        res.status(200).json(resposta)
+    })
+}
+
+function buscarUltimasPontuacoesPorUsuario(req, res){
+    const usuario = req.params.usuario
+    medidaModel.buscarUltimasPontuacoesPorUsuario(usuario).then((resposta)=>{
+        res.status(200).json(resposta)
+    })
+}
 module.exports = {
     buscarUltimasMedidas,
     buscarUltimasMedidasUsuario,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarUltimasPontuacoes,
+    buscarUltimasPontuacoesPorUsuario
 
 }

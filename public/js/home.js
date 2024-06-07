@@ -6,7 +6,7 @@ function detalhamento(jogo) {
             lol.style.display = 'none'
             bo2.style.display = 'none'
             ark.style.display = 'none'
-            imagem_jogo_lol.classList.toggle('img_lol')
+            imagem_jogo_lol.classList.add('img_lol')
             
             setTimeout(() => {
                               lol_painel.style.opacity = "1";
@@ -20,7 +20,7 @@ function detalhamento(jogo) {
         lol.style.display = 'none'
         bo2.style.display = 'none'
         ark.style.display = 'none'
-        imagem_jogo_bo2.classList.toggle('img_bo2')
+        imagem_jogo_bo2.classList.add('img_bo2')
 
         setTimeout(function(){
                                 bo2_painel.style.opacity = "1";
@@ -32,7 +32,7 @@ function detalhamento(jogo) {
         lol.style.display = 'none'
         bo2.style.display = 'none'
         ark.style.display = 'none'
-        imagem_jogo_ark.classList.toggle('img_ark')
+        imagem_jogo_ark.classList.add('img_ark')
 
         setTimeout(function(){
                                 ark_painel.style.opacity = "1";
@@ -54,9 +54,7 @@ function fechar(nome) {
 
                                 }, 250);
         box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
-
     } else if (nome.id == 'lol_fechar') {
-        
         lol_painel.style.opacity = "0"; // Configura a opacidade para 0 para iniciar a transição
         setTimeout(function() {
                                     lol_painel.style.display = 'none'

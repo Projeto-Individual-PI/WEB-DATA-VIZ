@@ -24,6 +24,26 @@
         color: violet;
     }
 }
+@keyframes animacao_lendario_borda {
+    0% {
+        border-color: red;
+    }
+    20% {
+        border-color: orange;
+    }
+    40% {
+        border-color: yellow;
+    }
+    60% {
+        border-color: green;
+    }
+    80% {
+        border-color: blue;
+    }
+    100% {
+        border-color: violet;
+    }
+}
 
 
 
@@ -38,6 +58,17 @@
     
 }
 
+@keyframes animacao_epico_borda {
+    from {
+        border-color: lightblue;
+        
+    }
+    to {
+        border-color: purple;
+    }
+    
+}
+
 
 @font-face {
     font-family: 'TT Commons Regular';
@@ -46,6 +77,16 @@
 
 
 
+@keyframes animacao_conteudo {
+    from {
+        scale: 0.8;
+        opacity: 0;
+    }
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
 .lendario_grafico {
     animation: animacao_lendario2 6s infinite;
 }
@@ -70,6 +111,13 @@
     animation-duration: 2s;
     animation-direction: alternate;
     animation-iteration-count: infinite;
+}
+.epico_borda{
+    animation-name: animacao_epico_borda;
+    animation-duration: 2s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    
 }
 .lendario{
     animation-name: animacao_lendario;
@@ -149,6 +197,11 @@ body {
     height: auto;
 }
 
+.botao_fechar:hover{
+    transition: 0.1s;
+    transform: scale(1.08);
+    cursor: pointer;
+}
 
 .header {
     z-index: inherit;
@@ -600,7 +653,10 @@ margin-left: 5%;
 .painel_graficos {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     min-height: 200px;
     height: auto;
+    gap: 100px;
 }

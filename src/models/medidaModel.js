@@ -36,8 +36,22 @@ function buscarMedidasEmTempoReal(idAquario) {
     return database.executar(instrucaoSql);
 }
 
+function buscarUltimasPontuacoes() {
+    var instrucaoSql = `
+    select usuario, count(fkusuario) as 'tentativas', sum(pontuacao) as 'pontuacao' from pontuacao_usuario join usuario on usuario.id = fkusuario group by fkusuario order by tentativas desc;
+    `
+    return database.executar(instrucaoSql)
+}
+
+function buscarUltimasPontuacoesPorUsuario(idusuario) {
+    var instrucaoSql = `
+        select genero, fkquiz as 'idquiz', Pontuacao, usuario, data from pontuacao_usuario join usuario on usuario.id = fkusuario join quiz on quiz.id = fkquiz where usuario.id = ${idusuario} order by data;` 
+        return database.executar(instrucaoSql)
+}
 module.exports = {
     buscarUltimasMedidas,
     buscarUltimasMedidasUsuario,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarUltimasPontuacoes,
+    buscarUltimasPontuacoesPorUsuario
 }

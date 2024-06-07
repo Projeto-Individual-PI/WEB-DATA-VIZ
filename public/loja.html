@@ -90,7 +90,7 @@
                         </div>
                     </div>
             </div>
-            
+           
         </div>
     </div>
 </body>
@@ -150,6 +150,12 @@ async function confirmar_escolha(escolha){
                                     </div>
                                 </div>
                             </div>
+                            <img id="img_carregando"style="
+                            width: 50px; 
+                            margin-left:35%;
+                            display: none
+                            
+                            "src="./assets/circle-loading.gif"></img> <br>
                              <button class="confirmar_botao" id="confirmar_botao" onclick="realizar_compra('${bau_escolhido.preco}', '${bau_escolhido.idBau}', quantidade.value, saldo_apos.innerHTML)">CONFIRMAR</button>
                              
                              `;
@@ -177,6 +183,10 @@ function atualiza_saldo_apos(qtd, preco){
 
 
 async function realizar_compra(bau_preco, bau_id, quantidade, saldo_apos) {
+    document.getElementById('confirmar_botao').setAttribute('disabled', true)
+    document.getElementById('img_carregando').style.display = 'block'
+    document.getElementById('confirmar_botao').style.display = 'none'
+
 
     if(Number(saldo_apos) >= 0){
 
