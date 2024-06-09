@@ -135,7 +135,7 @@ async  function Carregar_Inventario(id_usuario){
            }
             
             novoelemento = document.createElement('div')
-            novoelemento.innerHTML = `<p> HOUVE UM ERRO AO TENTAR REALIZAR A ACÃO! <br><br>${texto}</p> <p> POR FAVOR TENTE NOVAMENTE.</p>`
+            novoelemento.innerHTML = `<p> HOUVE UM ERRO AO TENTAR REALIZAR A AÇÃO! <br><br>${texto}</p> <p> POR FAVOR TENTE NOVAMENTE.</p>`
             novoelemento.id = 'aviso_msg'
             novoelemento.classList.add('aviso_painel')
             AVISO.appendChild(novoelemento);
