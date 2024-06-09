@@ -46,7 +46,7 @@
                 <div id="AVISO">
 
                 </div>
-                <div class="painel">
+                <div class="painel" id="painel_div">
                     <div class="card_erro" id="cardErro">
                         <span id="mensagem_erro"></span>
                       </div>
@@ -81,14 +81,21 @@
     async function entrar() {
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
-        console.log('teste')
+        var arroba = emailVar.indexOf('@');
+        var ponto = emailVar.indexOf('.');
+        var tamanho_email = emailVar.length;
+        var ultimaletra = emailVar[tamanho_email - 1];
+        var primeiraletra = emailVar[0];
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            aviso('erro', 'Email e/ou Senha estão nulos!')
+         
+         } if ((arroba == -1 || ponto == -1) || (ponto < arroba) || (ponto == arroba + 1) || (ultimaletra == '.') || (primeiraletra == '@')) {
+            aviso('erro', 'Insira um email válido')
         }
+        
         else {
-        }
+       
         await fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
@@ -108,10 +115,11 @@
                     img_loading.style.display = 'block'
                     setTimeout(function () {
                         img_loading.style.display = 'none'
-                        aviso('sucesso')
+                        aviso('sucesso', 'Login realizado com sucesso! <br><br> Redirecionando para a página principal')
+
                         setTimeout(() => {
                             window.location = "./home_logada.html";
-                        } ,1000)
+                        } ,1500)
                     }, 500); // apenas para exibir o loading
 
                 });
@@ -119,6 +127,7 @@
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
+                aviso('erro', 'Email e/ou Senha inválidos!')
                 resposta.text().then(texto => {
                     console.error(texto);
                 });
@@ -129,4 +138,5 @@
         })
 
     }
+}
 </script>

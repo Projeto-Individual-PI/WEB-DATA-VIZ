@@ -1,7 +1,7 @@
 function exibir_creditos(creditos) {
     mensagem = document.getElementById('mensagem_creditos')
     if(mensagem){
-        mensagem.innerHTML = `Creditos: ${creditos}`
+        
     }
     
 }

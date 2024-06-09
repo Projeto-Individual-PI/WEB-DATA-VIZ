@@ -8,6 +8,7 @@
     
     <link rel="icon" href="./assets/icon/favicon2.ico" />
     <link rel="stylesheet" href="./css/cadastro.css">
+    
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 <body>
@@ -47,6 +48,9 @@
                 
                     </div>
                 </div>
+                <div id="AVISO">
+
+                </div>
                 <div class="painel">
                     <div class="texto">
                         <p>Insira as suas informações</p>
@@ -59,10 +63,10 @@
                             <input type="text" name="email_input" id="email_input">
                         </label>
                         <label>Senha<br>
-                            <input type="text" name="senha_input" id="senha_input">
+                            <input type="password" name="senha_input" id="senha_input">
                         </label>
                         <label>Confirmar senha<br>
-                            <input type="text" name="confirmar_senha_input" id="confirmar_senha_input">
+                            <input type="password" name="confirmar_senha_input" id="confirmar_senha_input">
                         </label>
                         <div class="button">
                             <button onclick="cadastrar()">Cadastrar</button>
@@ -101,7 +105,20 @@
     
   function cadastrar() {
   
+    var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+        var arroba = emailVar.indexOf('@');
+        var ponto = emailVar.indexOf('.');
+        var tamanho_email = emailVar.length;
+        var ultimaletra = emailVar[tamanho_email - 1];
+        var primeiraletra = emailVar[0];
 
+        if (emailVar == "" || senhaVar == "") {
+            aviso('erro', 'Email e/ou Senha estão nulos!')
+         
+         } if ((arroba == -1 || ponto == -1) || (ponto < arroba) || (ponto == arroba + 1) || (ultimaletra == '.') || (primeiraletra == '@')) {
+            aviso('erro', 'Insira um email válido')
+        }
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = usuario_input.value;
@@ -110,6 +127,11 @@
     var confirmacaoSenhaVar = confirmar_senha_input.value;
     var senha_tamanho = senhaVar.length;
     var nome_tamanho = nomeVar.length;
+    var arroba = emailVar.indexOf('@');
+        var ponto = emailVar.indexOf('.');
+        var tamanho_email = emailVar.length;
+        var ultimaletra = emailVar[tamanho_email - 1];
+        var primeiraletra = emailVar[0];
 
     if (
       nomeVar == "" ||
@@ -117,29 +139,24 @@
       senhaVar == "" ||
       confirmacaoSenhaVar == "" 
     ) {
-      cardErros.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
+      aviso('erro', 'Preencha todos os campos!')
     }
     else if (
     nome_tamanho <= 1
     ) {
-      cardErros.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(O seu nome deve ter mais de um dígito!)";
+      aviso('erro', 'Seu nome precisa ter mais de um dígito!')
 
     } else if (
     senhaVar != confirmacaoSenhaVar
     ) {
-      cardErros.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(As duas senhas devem ser iguais!)";
+      aviso('erro', 'As senhas precisam ser iguais!')
 
-    }
+
+    }else if ((arroba == -1 || ponto == -1) || (ponto < arroba) || (ponto == arroba + 1) || (ultimaletra == '.') || (primeiraletra == '@')) {
+            aviso('erro', 'Insira um email válido')
+        }
     else {
       
-    }
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -159,11 +176,14 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErros.style.display = "block";
+      
+          setTimeout(function () {
+                        aviso('sucesso', 'Cadastro realizado com sucesso! <br><br> Redirecionando para a página de Login')
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
+                        setTimeout(() => {
+                            window.location = "./home_logada.html";
+                        } ,1500)
+                    }, 500); // apenas para exibir o loading
 
           setTimeout(() => {
             window.location = "./login.html";
@@ -179,5 +199,6 @@
 
     return false;
   }
+}
 
 </script>

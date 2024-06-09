@@ -346,7 +346,9 @@ async function fechar_painel(id){
  bau1.classList.toggle("visible_bau")
  bau2.classList.toggle("visible_bau")
  bau3.classList.toggle("visible_bau")
-
+    if(document.getElementById('div_premio') != null){
+        document.getElementById('div_premio').innerHTML = ''
+ }
  setTimeout(() => {
      painel.style.display = 'none';
      bau1.style.display = 'none';
@@ -359,7 +361,7 @@ async function fechar_painel(id){
      setTimeout(() => {
          painel2.classList.toggle("visible_painel2")
          bau4.classList.toggle("visible_bau")
-         bau4.innerHTML = `<img  onclick='abrir_bau(${JSON.stringify(bau_escolhido)})' id ='img_bau4'  alt="bau-icon">`;
+         bau4.innerHTML = `<img style="width: 100px;"  onclick='abrir_bau(${JSON.stringify(bau_escolhido)})' id ='img_bau4'  alt="bau-icon">`;
          img_bau4.src = '../assets/img-icons/bau-fechado.png'
          mensagem_p2.innerHTML = ` 
          <p style="text-align: center;">${bau_escolhido.nome}</p>

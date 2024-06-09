@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home Logada</title>
    <link rel="stylesheet" href="./css/home.css">
+   <script src="./js/sessao.js"></script>
 </head>
 <body>
 
@@ -39,18 +40,26 @@
                                     Cadastro
                                 </a>
                             </div>
-                        
                             </div>
                     
                 </div>
     
                 <div class="centro">
-                        <div class="conteudo">
-                            <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam culpa rem atque. Assumenda aliquid minus nihil fuga, voluptatibus, nam veniam quam vitae temporibus necessitatibus esse! Natus exercitationem blanditiis quas aliquam.
+                    
+                        <div class="conteudo" style="flex-direction: column;width: 55%; align-items: center; background-color: rgb(0,0,0, 0.5); ">
+                            <p style="width: 80%; text-align: center; font-size: 25px; color: white;">
+                            A indústria dos jogos no Brasil está em uma <span style="color: aqua;">constante crescente</span> atualmente
+                            e vem se tornando cada vez mais relevante na vida das pessoas.
+                        <br>
+                        <br>
+                             Com os jogos digitais conquistando cada vez mais seu espaço no coração dos brasileiros durante os últimos anos, é notável a expansão que o mercado desse nicho apresenta. 
+                             <br>
+                             <br>
+                              Hoje é muito comum pessoas ganharem a vida através da produção de conteúdo com os jogos, competições profissionais e todas as outras áreas que estão relacionadas com esse mundo.
+                              <br><br>
+                              Coisa que não era muito conhecida até pouco tempo atrás
                             </p>
                         </div>
-                    
                 </div>
          </div>
 
@@ -59,40 +68,102 @@
         <div class="centro">
             <div class="conteudo">
 
-                <h1>EXPLORE THE WORLD</h1>
+                <h1 class="texto_body">Meus três jogos favoritos.</h1>
                 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem eum optio quia fuga perferendis repellat maxime itaque illum ducimus voluptate, hic esse et quam, possimus odio eius consequatur maiores ab.</p>
+                <h2 class="texto_body">Clique em uma das imagens para ver um pouco sobre os jogos que mais marcaram a minha vida.</h2>
 
                 
-                <div class="bo2" id="bo2_painel">
-                    <div class="botao">
-
-                    <button onclick="fechar(this)" id="bo2_fechar">
-                        X
-                    </button>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni totam provident rerum quia modi? Odio veritatis velit qui doloribus sunt quis, ea sed culpa ipsum iste illo ullam voluptatibus officiis?</p>
+                <div class="painel_jogo" id="bo2_painel">
                     
-                </div>
-                <div class="lol" id="lol_painel">
-                    <div class="botao">
-
-                    <button onclick="fechar(this)" id="lol_fechar">
+                    <button class="botao" onclick="fechar(this)" id="bo2_fechar">
                         X
                     </button>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis provident, eaque, suscipit atque ex praesentium asperiores dolor harum fugit veniam distinctio eum inventore sint quas est odio nobis voluptatibus dignissimos.</p>
-                    </div>                    
+                    <div style="
+                    display: flex;
+                    flex-direction: row;
+                    ">
+                    <div class="texto">
+                        <p style="text-align: left;">
+                            
+                            Call of Duty: Black OPs II é um dos clássicos fps (first person shooter) das antigas gerações.
+                            <br> <br>
+                            Ele possui diversos modos de jogo como Campanha, Multiplayer, e Zombies onde cada modo possui experiências únicas e divertidas.
+                            <br> <br>
+                            Esse jogo fez parte da minha infância, passei muitas horas jogando ele sempre que eu chegava da escola
+                            e fiz diversas memórias com amigos enquanto eu jogava. 
+                            <br> <br>
+                            Meu modo de jogo favorito é o Multiplayer, onde 
+                            duas equipes de jogadores se enfrentam com o objetivo de alcançar a maior pontuação possível.
+                        </p>
+
+
+
+                        </div>     
+                        <div style="display: flex; flex-direction: column;">
+
+                            <div class="imagem" id="imagem_jogo_bo2" style="margin-top: 60px; border: #01C38D solid 5px;">
+                            </div>
+                            <span style="margin-left: 150px; margin-top: 20px; font-size: 20px;">
+                                Call of Duty: Black Ops II
+                            </span>
+                        </div>
+                        </div>
+
+                </div>             
+                <div class="painel_jogo" id="lol_painel">
+                    <button class="botao" onclick="fechar(this)" id="lol_fechar">
+                        X
+                    </button>
+                    <div style="
+                    display: flex;
+                    flex-direction: row;
+                    "> 
+                    <div class="texto">
+                    <p style="text-align: start;">League of Legends é um clássico MOBA (multiplayer online battle arena) onde dez jogadores se enfrentam em duas equipes de cinco pessoas. 
+                    <br> <br>
+                    Os jogadores exploram recursos no mapa e vão acumulando vantagens para 
+                    ficarem mais fortes e ganharem vantagem nas lutas em equipe com o objetivo de destruir o nexus inimigo.
+                    <br> <br>
+                    Esse é o meu jogo mais jogado atualmente, comecei a me interessar por ele nos últimos 5 anos e hoje em dia possuo relacionamentos ótimos que foram construídos durante esse tempo e memórias que eu vou carregar com carinho pelo resto da minha vida.        
+                </p>
+                    </div>   
+                    <div style="display: flex; flex-direction: column;">
+                    <div class="imagem" id="imagem_jogo_lol" style="margin-top: 60px; border: #01C38D solid 5px;">
+                    </div>   
+                    <span style="margin-left: 150px; margin-top: 20px; font-size: 20px;">
+                        League of Legends
+                    </span>
                 </div>
-                <div class="ark" id="ark_painel">
-                    <div class="botao">
-                        <button onclick="fechar(this)" id="ark_fechar">
+                </div>    
+                </div>
+                <div class="painel_jogo" id="ark_painel">
+                    <button class="botao" onclick="fechar(this)" id="ark_fechar">
                             X
                         </button>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis omnis mollitia quisquam exercitationem recusandae, quis, veniam eligendi inventore neque quaerat amet, esse quae nesciunt ad quos! Aliquam magnam ducimus voluptatum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate at necessitatibus id natus deleniti cumque laborum, fugiat numquam alias error iste ab facilis ipsum optio, cum consequatur officia molestias culpa?</p>
-
-                    </div>
-
-                    
+                    <div style="
+                    display: flex;
+                    flex-direction: row;
+                    ">  
+                        <div class="texto">
+                            <p style="text-align: start;">Ark Survival Evolved é um jogo de sobrevivência que se passa em uma linha do tempo futurista com diversos mapas que buscam misturar alta técnologia com seres pré-históricos.
+                            <br> <br>
+                            Você começa o jogo sendo solto em uma região aleatória do mapa e tem que sobreviver a diversos desafios em um lugar onde a lei do mais forte predomina e você está na base da cadeia alimentar.
+                            <br> <br>
+                            Esse jogo foi o que mais me marcou durante o início da minha mudança dos consoles para o computador. 
+                            <br> <br>
+                            Eu passei 
+                            diversas horas explorando a grande quantidade de conteúdo presente nos mapas do jogo, construindo relações
+                            com as pessoas enquanto eu jogava e criando memórias que eu levaria pra vida. 
+                        </p>
+                            </div>      
+                            <div style="display: flex; flex-direction: column;">
+                            <div class="imagem" id="imagem_jogo_ark" style="margin-top: 60px;border: #01C38D solid 5px;">
+                            </div>
+                            <span style="margin-left: 150px; margin-top: 20px; font-size: 20px;">
+                                Ark Survival Evolved
+                            </span>
+                            </div>
+                            </div>
                 </div>
                 <div class="alinha_imagem">
                         <div class="conteudo_img" onclick="detalhamento(this)" id="lol">
@@ -106,17 +177,25 @@
                             <img src="https://upload.wikimedia.org/wikipedia/pt/d/d0/Ark_Survival_Evolved_%C3%ADcone_digital_Nintendo_Switch_Studio_Wildcard.png" style="height: 350px;" alt="lol logo">
                         </div>
                   </div>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis tempora, tempore, fugit sint consequuntur placeat, voluptate ut natus dolores odit odio! Rem maxime, laudantium molestiae iste nemo rerum ex ipsum?</p>  
+             
             </div>
         </div>
     </div>
     <div class="box3">
             <div class="mascara2">
                 <div class="centro">
-                    <div class="conteudo">
-                        <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam culpa rem atque. Assumenda aliquid minus nihil fuga, voluptatibus, nam veniam quam vitae temporibus necessitatibus esse! Natus exercitationem blanditiis quas aliquam.
+                    <div class="conteudo" style="width: 85%; justify-content: space-around; background-color: #d9d9d9;">
+                        <p style="width: 45%; text-align: left; font-size: 25px;">
+                            Olá, meu nome é Filipe Guerreiro e atualmente eu me encontro imerso no mundo da programação, tenho 19 anos e
+                            uma das minhas atividades favoritas desde pequeno sempre foi jogar video-games. <br><br>Nesse projeto eu busco
+                            contar um pouco mais sobre esse mundo dos jogos junto da influência dele na minha vida, também busco explorar o desenvolvimento da minha lógica criando um sistema de compra e abertura de baús.
+                            <br> <br>
+                            Responda algumas perguntas no quiz para ganhar <span style="color: blue;">créditos</span>, com eles você pode comprar <span style="color: blue;">baús</span> na loja e retirar <span style="color: blue;">prêmios</span> no seu
+                            inventário.
                         </p>
+                        <div class="conteudo" style="margin-top: 100px; margin-left: 20px;background-color: transparent;">
+                            <img height="70%" style="border-radius: 5px;" width="80%" src="./assets/imgs/eu.jpg" alt="">
+                            </div>
                     </div>
                 
                 </div>
@@ -128,87 +207,5 @@
 
 </body>
 </html>
-<script>
-    
-    function detalhamento(jogo) {
-        
-        if(jogo.id == 'lol') {
-            
-                lol_painel.style.display = 'flex'
-                                        lol.style.display = 'none'
-                                        bo2.style.display = 'none'
-                                        ark.style.display = 'none'
-                                        setTimeout(function(){
-                    lol_painel.style.opacity = "1";
-                                        
-                                    }, 250);
-                box2.style.backgroundImage = "url('https://s1.picswalls.com/wallpapers/2015/11/21/beautiful-league-of-legends-wallpaper_111229615_289.jpg')"
-                                
-            
-            
-        }else if (jogo.id == 'bo2') {
-            bo2_painel.style.display = 'flex'
-            lol.style.display = 'none'
-            bo2.style.display = 'none'
-            ark.style.display = 'none'
-            setTimeout(function(){
-                                    bo2_painel.style.opacity = "1";
-                                        
-                                  }, 250);
-                                  
-            box2.style.backgroundImage = "url('../assets/bo2.jpg')"
-            
-        }else {
-            ark_painel.style.display = 'flex'
-            lol.style.display = 'none'
-            bo2.style.display = 'none'
-            ark.style.display = 'none'
-            setTimeout(function(){
-                                    ark_painel.style.opacity = "1";
-                                        
-                                 }, 250);
-            box2.style.backgroundImage = "url('https://www.gamewallpapers.com/wallpapers_slechte_compressie/wallpaper_ark_survival_evolved_02_1920x1080.jpg')"
-
-            
-        }
-    }
-    function fechar(nome) {
-        if (nome.id == 'bo2_fechar') {
-            bo2_painel.style.opacity = '0'
-            setTimeout(function() {
-                                        bo2_painel.style.display = 'none'
-                                        lol.style.display = 'flex'
-                                        bo2.style.display = 'flex'
-                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
-                                    }, 250);
-            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
-
-        } else if (nome.id == 'lol_fechar') {
-            
-            lol_painel.style.opacity = "0"; // Configura a opacidade para 0 para iniciar a transição
-            setTimeout(function() {
-                                        lol_painel.style.display = 'none'
-                                        lol.style.display = 'flex'
-                                        bo2.style.display = 'flex'
-                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
-                                    }, 250); // Espera 500 milissegundos (0.5 segundos) para garantir que a transição seja concluída
-            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
-                            
-            
-        } else {
-            ark_painel.style.opacity = '0'
-            setTimeout(function() {
-                                        ark_painel.style.display = 'none'
-                                        lol.style.display = 'flex'
-                                        bo2.style.display = 'flex'
-                                        ark.style.display = 'flex' // Esconde a div após a transição de opacidade
-                                    }, 250);
-            box2.style.backgroundImage = 'linear-gradient(rgb(0,0,0,0.80), rgb(0,0,0), rgb(0,0,0,0.95))'
-
-        }
-    
-
-      
-
-    }
-</script>
+<script src="./js/loja.js"></script>
+<script src="./js/home.js"></script>

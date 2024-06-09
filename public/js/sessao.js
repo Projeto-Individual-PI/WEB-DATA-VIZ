@@ -116,16 +116,28 @@ async  function Carregar_Inventario(id_usuario){
         header_creditos.innerHTML = `Créditos: ${creditos}`
     }
 
-    function aviso(mensagem) {
+    function aviso(mensagem, texto) {
         if(mensagem == 'sucesso'){
+            if(document.getElementById('aviso_msg') != null){
 
+                document.getElementById('aviso_msg').remove()
+            }
             novoelemento = document.createElement('div')
-            novoelemento.innerHTML = '<p> LOGIN REALIZADO COM SUCESSO!</p> <p> REDIRECIONANDO PARA A PÁGINA PRINCIPAL.</p>'
-            novoelemento.id = 'aviso'
+            novoelemento.innerHTML = `<p>${texto}</p>`
+            novoelemento.id = 'aviso_msg'
             novoelemento.classList.add('aviso_painel')
             AVISO.appendChild(novoelemento);
             
         }else if(mensagem == 'erro'){
-            AVISO.innerHTML = 'BBBBBBBBBBBBBBBBBBBBB'
+           if(document.getElementById('aviso_msg') != null){
+
+               document.getElementById('aviso_msg').remove()
+           }
+            
+            novoelemento = document.createElement('div')
+            novoelemento.innerHTML = `<p> HOUVE UM ERRO AO TENTAR REALIZAR A ACÃO! <br><br>${texto}</p> <p> POR FAVOR TENTE NOVAMENTE.</p>`
+            novoelemento.id = 'aviso_msg'
+            novoelemento.classList.add('aviso_painel')
+            AVISO.appendChild(novoelemento);
         }
     }

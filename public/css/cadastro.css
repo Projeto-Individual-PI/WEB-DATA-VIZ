@@ -4,7 +4,17 @@
 }
 
         
-        
+@keyframes animacao_conteudo {
+    from {
+        scale: 0.8;
+        opacity: 0;
+    }
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+ 
 
 body {
     font-family: 'TT Commons Regular', sans-serif;
@@ -167,4 +177,30 @@ cursor: pointer;
 }
 .painel button:hover{
     cursor: pointer;
+}
+.aviso_painel{
+    min-width: 500px;
+    flex-wrap: wrap;
+    width: auto;
+    height: auto;
+    min-height: 100px;
+    background-color: #132D46;
+    border: #01C38D solid 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: all 1.5s;
+    animation-name: animacao_conteudo;
+    animation-duration: 2s;
+    animation-direction: normal;
+}
+.aviso_painel p{
+    margin-left: 10px;
+    margin-right: 10px;
+
 }
